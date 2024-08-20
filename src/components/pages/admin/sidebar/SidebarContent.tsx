@@ -69,59 +69,27 @@ const SidebarContent: React.FC = (props) => {
           <NavItem icon={MdHome}>Dashboard</NavItem>
         </Link>
         <NavItem icon={IoMdCalculator} onClick={onReport} isActive={isReport}>
-          Reporting
+          Akta Perusahaan
           <Icon
             as={isReport ? MdKeyboardArrowDown : MdKeyboardArrowRight}
             ml="auto"
           />
         </NavItem>
         <Collapse in={isReport}>
-          <Link to="/calculator">
+          <Link to="/admin/akta-perusahaan">
             <NavItem pl="12" py="2">
-              Calculator
+              Dokumen Perusahaan
             </NavItem>
           </Link>
-          <Link to="/adjustmentpremium">
+          <Link to="/admin/akta-direksi">
             <NavItem pl="12" py="2">
-              Adjustment Premium
-            </NavItem>
-          </Link>
-          <Link to="/data/staging">
-            <NavItem pl="12" py="2">
-              Data Staging
-            </NavItem>
-          </Link>
-          <Link to="/data/base">
-            <NavItem pl="12" py="2">
-              Database
+              Dokumen Direksi
             </NavItem>
           </Link>
         </Collapse>
-        <Link to="/tbill">
-          <NavItem icon={MdBuild}>TBill</NavItem>
-        </Link>
-        <NavItem icon={IoMdPaper} onClick={onClaim} isActive={isClaim}>
-          Claims
-          <Icon
-            as={isClaim ? MdKeyboardArrowDown : MdKeyboardArrowRight}
-            ml="auto"
-          />
-        </NavItem>
-        <Collapse in={isClaim}>
-          <Link to="/claims/input">
-            <NavItem pl="12" py="2">
-              Claims Input
-            </NavItem>
-          </Link>
-          <Link to="/claims/table">
-            <NavItem pl="12" py="2">
-              Claims Table
-            </NavItem>
-          </Link>
-        </Collapse>
-        <Link to="/logout">
+        {/* <Link to="/logout">
           <NavItem icon={IoMdLogOut}>Logout</NavItem>
-        </Link>
+        </Link>  */}
       </Flex>
     </Box>
   );
