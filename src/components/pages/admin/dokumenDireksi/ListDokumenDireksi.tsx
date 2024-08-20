@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {
   Flex,
   Stack,
@@ -16,15 +17,13 @@ import {
   Grid,
   GridItem,
 } from '@chakra-ui/react';
-import axios from 'axios';
-import useSWR, { useSWRConfig } from 'swr';
 import { AiTwotoneLock } from 'react-icons/ai';
 import { BsFillTrashFill } from 'react-icons/bs';
+import useSWR, { useSWRConfig } from 'swr';
 import FilterByType from './FilterByType';
 import AddDokumenDireksi from './AddDokumenDireksi';
 import EditDokumenDireksi from './EditDokumenDireksi';
 
-// Define the fetcher function
 const fetcher = async (filter: string) => {
   const url = filter
     ? `http://localhost:5000/akta?type=${filter}`
@@ -64,13 +63,31 @@ const ListDokumenDireksi = () => {
     }
   };
 
-  const handleViewDocument = (url: string, fileName: string) => {
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = fileName;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleViewDocument = async (id: number, fileName: string) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/documents/${id}`,
+        {
+          responseType: 'blob', // Important for binary data
+        }
+      );
+
+      if (response.status === 200 && response.data) {
+        const url = window.URL.createObjectURL(
+          new Blob([response.data], { type: 'application/pdf' })
+        );
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `${fileName}.pdf`); // Adjust filename if needed
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      } else {
+        console.error('Failed to download document:', response.data);
+      }
+    } catch (error) {
+      console.error('Failed to download document:', error);
+    }
   };
 
   return (
@@ -78,9 +95,9 @@ const ListDokumenDireksi = () => {
       <Text
         fontSize="6xl"
         textAlign="center"
-        fontFamily="body" // Use the font family defined in theme
+        fontFamily="body"
         fontWeight="bold"
-        mb={6} // Margin-bottom for spacing
+        mb={6}
       >
         Akta Perusahaan
       </Text>
@@ -110,7 +127,7 @@ const ListDokumenDireksi = () => {
             <>
               <SimpleGrid
                 spacing={2}
-                columns={{ base: 1, md: 7 }} // Increased columns count for the index
+                columns={{ base: 1, md: 7 }}
                 w="full"
                 textTransform="uppercase"
                 bg="gray.200"
@@ -137,7 +154,7 @@ const ListDokumenDireksi = () => {
                 >
                   <SimpleGrid
                     spacing={4}
-                    columns={{ base: 1, md: 7 }} // Increased columns count for the index
+                    columns={{ base: 1, md: 7 }}
                     w="full"
                     py={2}
                     px={{ base: 2, md: 6 }}
@@ -161,12 +178,7 @@ const ListDokumenDireksi = () => {
                         variant="solid"
                         leftIcon={<Icon as={AiTwotoneLock} />}
                         colorScheme="purple"
-                        onClick={() =>
-                          handleViewDocument(
-                            `http://localhost:5000/uploads/${akta.id}`,
-                            akta.name
-                          )
-                        }
+                        onClick={() => handleViewDocument(akta.id, akta.name)}
                       >
                         Lihat Dokumen
                       </Button>

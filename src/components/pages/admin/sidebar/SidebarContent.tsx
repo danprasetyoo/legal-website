@@ -26,7 +26,7 @@ import NavItem from './SidebarItems';
 import { Link } from 'react-router-dom';
 
 const SidebarContent: React.FC = (props) => {
-  const { isOpen: isReport, onToggle: onReport } = useDisclosure();
+  // const { isOpen: isReport, onToggle: onReport } = useDisclosure();
   // const { isOpen: isClaim, onToggle: onClaim } = useDisclosure();
 
   return (
@@ -74,7 +74,10 @@ const SidebarContent: React.FC = (props) => {
         <Link to="/dashboard">
           <NavItem icon={MdHome}>Dashboard</NavItem>
         </Link>
-        <NavItem icon={IoMdCalculator} onClick={onReport} isActive={isReport}>
+        <Link to="/admin/akta">
+          <NavItem icon={IoMdCalculator}>Akta Perusahaan</NavItem>
+        </Link>
+        {/* <NavItem icon={IoMdCalculator} onClick={onReport} isActive={isReport}>
           Akta Perusahaan
           <Icon
             as={isReport ? MdKeyboardArrowDown : MdKeyboardArrowRight}
@@ -92,7 +95,7 @@ const SidebarContent: React.FC = (props) => {
               Dokumen Direksi
             </NavItem>
           </Link>
-        </Collapse>
+        </Collapse> */}
         <Link to="/admin/aset-perusahaan">
           <NavItem icon={IoMdApps}>Aset Perusahaan</NavItem>
         </Link>

@@ -18,7 +18,6 @@ const FilterByType: React.FC<FilterByTypeProps> = ({
         value={selectedType}
         maxW="200px"
       >
-        {/* <option value="">All</option> */}
         <option value="DIREKSI">Direksi</option>
         <option value="PERUSAHAAN">Perusahaan</option>
       </Select>

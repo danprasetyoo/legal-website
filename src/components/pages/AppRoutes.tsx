@@ -4,7 +4,7 @@ import ListDokumenDireksi from './admin/dokumenDireksi/ListDokumenDireksi';
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/admin/akta-direksi" element={<ListDokumenDireksi />} />
+      <Route path="/admin/akta" element={<ListDokumenDireksi />} />
     </Routes>
   );
 }
