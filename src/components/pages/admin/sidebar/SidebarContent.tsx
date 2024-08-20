@@ -15,13 +15,19 @@ import {
   MdAdjust,
   MdReceipt,
 } from 'react-icons/md';
-import { IoMdCalculator, IoMdLogOut, IoMdPaper } from 'react-icons/io';
+import {
+  IoMdCalculator,
+  IoMdLogOut,
+  IoMdApps,
+  IoMdRepeat,
+  IoIosAttach,
+} from 'react-icons/io';
 import NavItem from './SidebarItems';
 import { Link } from 'react-router-dom';
 
 const SidebarContent: React.FC = (props) => {
   const { isOpen: isReport, onToggle: onReport } = useDisclosure();
-  const { isOpen: isClaim, onToggle: onClaim } = useDisclosure();
+  // const { isOpen: isClaim, onToggle: onClaim } = useDisclosure();
 
   return (
     <Box
@@ -87,9 +93,18 @@ const SidebarContent: React.FC = (props) => {
             </NavItem>
           </Link>
         </Collapse>
-        {/* <Link to="/logout">
+        <Link to="/admin/aset-perusahaan">
+          <NavItem icon={IoMdApps}>Aset Perusahaan</NavItem>
+        </Link>
+        <Link to="/admin/sop-legal">
+          <NavItem icon={IoMdRepeat}>SOP Legal</NavItem>
+        </Link>
+        <Link to="/admin/materi-legal">
+          <NavItem icon={IoIosAttach}>Materi Legal</NavItem>
+        </Link>
+        <Link to="/logout">
           <NavItem icon={IoMdLogOut}>Logout</NavItem>
-        </Link>  */}
+        </Link>
       </Flex>
     </Box>
   );
