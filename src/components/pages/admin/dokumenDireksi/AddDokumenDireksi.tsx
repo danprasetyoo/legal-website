@@ -119,7 +119,7 @@ const AddDokumenDireksi = ({ onSuccess }: AddProps) => {
               <FormLabel>Type</FormLabel>
               <Select value={type} onChange={(e) => setType(e.target.value)}>
                 <option value="DIREKSI">DIREKSI</option>
-                <option value="PENDUKUNG">PENDUKUNG</option>
+                <option value="PERUSAHAAN">PERUSAHAAN</option>
               </Select>
             </FormControl>
             <FormControl mb={4}>
