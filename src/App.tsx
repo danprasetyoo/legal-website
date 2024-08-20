@@ -2,7 +2,7 @@ import React from 'react';
 import { ChakraProvider, theme, Box, Flex } from '@chakra-ui/react';
 import { BrowserRouter } from 'react-router-dom';
 import SidebarContent from './components/pages/admin/sidebar/SidebarContent';
-// import AppRoutes from './components/AppRoutes';
+import AppRoutes from './components/pages/AppRoutes';
 
 export const App = () => (
   <ChakraProvider theme={theme}>
@@ -29,7 +29,7 @@ export const App = () => (
           flex="1" // Allow main content to take up the remaining space
           p={4}
         >
-          {/* <AppRoutes /> */}
+          <AppRoutes />
         </Box>
       </Flex>
     </BrowserRouter>
