@@ -1,9 +1,10 @@
-// import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import ListDokumenDireksi from './admin/dokumenDireksi/ListDokumenDireksi';
 
-// export default function AppRoutes() {
-//   return (
-//     <Routes>
-
-//     </Routes>
-//   );
-// }
+export default function AppRoutes() {
+  return (
+    <Routes>
+      <Route path="/admin/akta-direksi" element={<ListDokumenDireksi />} />
+    </Routes>
+  );
+}
