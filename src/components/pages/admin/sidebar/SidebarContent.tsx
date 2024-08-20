@@ -66,7 +66,7 @@ const SidebarContent: React.FC = (props) => {
       <Flex
         direction="column"
         as="nav"
-        fontSize="md"
+        fontSize="sm"
         color="black"
         aria-label="Main Navigation"
         my="4"

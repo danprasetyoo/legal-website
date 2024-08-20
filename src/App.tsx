@@ -1,11 +1,14 @@
 import React from 'react';
-import { ChakraProvider, theme, Box, Flex } from '@chakra-ui/react';
+import { ChakraProvider, Box, Flex } from '@chakra-ui/react';
 import { BrowserRouter } from 'react-router-dom';
 import SidebarContent from './components/pages/admin/sidebar/SidebarContent';
 import AppRoutes from './components/pages/AppRoutes';
+import theme from './theme'; // Import your custom theme
 
 export const App = () => (
   <ChakraProvider theme={theme}>
+    {' '}
+    {/* Use the custom theme */}
     <BrowserRouter>
       <Flex
         direction={{ base: 'column', md: 'row' }} // Stack vertically on small screens and horizontally on medium and up

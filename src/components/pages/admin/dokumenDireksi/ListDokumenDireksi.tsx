@@ -9,34 +9,49 @@ import {
   ButtonGroup,
   Text,
   Box,
+  Spinner,
+  Alert,
+  AlertIcon,
 } from '@chakra-ui/react';
 import axios from 'axios';
 import useSWR, { useSWRConfig } from 'swr';
 import { AiTwotoneLock } from 'react-icons/ai';
 import { BsFillTrashFill } from 'react-icons/bs';
-// import Add from './Add';
-// import Edit from './Edit';
-// import Danger from '../../../future/danger';
+import AddDokumenDireksi from './AddDokumenDireksi'; // Uncomment if Add component is needed
+import EditDokumenDireksi from './EditDokumenDireksi'; // Uncomment if Edit component is needed
+
+// Define the fetcher function
+const fetcher = async () => {
+  const response = await axios.get('http://localhost:5000/akta');
+  return response.data;
+};
 
 const ListDokumenDireksi = () => {
+  const { data, error } = useSWR('akta', fetcher);
   const { mutate } = useSWRConfig();
 
-  // Adjusted endpoint and fetcher to reflect the `akta` model
-  const fetcher = async () => {
-    const response = await axios.get(`http://localhost:5000/akta`);
-    return response.data.map((item: any) => ({
-      ...item,
-      createdAt: new Date(item.createAt).toLocaleDateString('en-GB'),
-    }));
-  };
+  if (error) {
+    return (
+      <Alert status="error">
+        <AlertIcon />
+        Failed to load data.
+      </Alert>
+    );
+  }
 
-  const { data } = useSWR('akta', fetcher);
+  if (!data) {
+    return <Spinner />;
+  }
 
-  //   if (!data) return <Danger />;
+  const aktaData = Array.isArray(data) ? data : [];
 
   const deleteAkta = async (aktaId: number) => {
-    await axios.delete(`http://localhost:5000/akta/${aktaId}`);
-    mutate('akta');
+    try {
+      await axios.delete(`http://localhost:5000/akta/${aktaId}`);
+      mutate('akta');
+    } catch (error) {
+      console.error('Failed to delete akta:', error);
+    }
   };
 
   const handleViewDocument = (url: string, fileName: string) => {
@@ -49,17 +64,17 @@ const ListDokumenDireksi = () => {
   };
 
   return (
-    <Box bg="white">
+    <Box bg="white" p={4}>
       <Text
-        fontSize="4xl"
+        fontSize="6xl"
         textAlign="center"
-        fontFamily="poppins"
+        fontFamily="body" // Use the font family defined in theme
         fontWeight="bold"
-        pt={5}
+        mb={6} // Margin-bottom for spacing
       >
-        Daftar Dokumen Direksi
+        Akta Perusahaan
       </Text>
-      {/* <Add /> */}
+      <AddDokumenDireksi />
       <Flex
         w="full"
         bg="white"
@@ -68,25 +83,28 @@ const ListDokumenDireksi = () => {
         justifyContent="center"
       >
         <Stack direction={{ base: 'column' }} w="100%" bg="white" shadow="lg">
-          {data === null ? (
-            <></>
+          {aktaData.length === 0 ? (
+            <Text textAlign="center" p={4} fontSize="md">
+              No records found.
+            </Text>
           ) : (
-            data.map((akta: any) => (
+            aktaData.map((akta: any) => (
               <Flex
                 direction={{ base: 'row', md: 'column' }}
                 bg="white"
                 key={akta.id}
+                mb={4} // Margin-bottom for spacing between rows
               >
                 <SimpleGrid
-                  spacingY={3}
-                  columns={{ base: 1, md: 4 }}
+                  spacing={4} // Adjust column spacing
+                  columns={{ base: 1, md: 6 }}
                   w={{ base: 130, md: 'full' }}
                   textTransform="uppercase"
                   bg="gray.200"
                   color="black.500"
-                  py={{ base: 1, md: 4 }}
-                  px={{ base: 2, md: 10 }}
-                  fontSize="md"
+                  py={{ base: 2, md: 4 }} // Adjust vertical padding
+                  px={{ base: 2, md: 6 }} // Adjust horizontal padding
+                  fontSize="md" // Use font size from theme
                   fontWeight="bold"
                 >
                   <chakra.span>Nama File</chakra.span>
@@ -97,11 +115,12 @@ const ListDokumenDireksi = () => {
                   <chakra.span textAlign={{ md: 'right' }}>Actions</chakra.span>
                 </SimpleGrid>
                 <SimpleGrid
-                  spacingY={3}
-                  columns={{ base: 1, md: 4 }}
+                  spacing={4} // Adjust column spacing
+                  columns={{ base: 1, md: 6 }}
                   w="full"
                   py={2}
-                  px={10}
+                  px={{ base: 2, md: 6 }} // Adjust horizontal padding
+                  fontSize="md" // Use font size from theme
                   fontWeight="hairline"
                 >
                   <chakra.span>{akta.name}</chakra.span>
@@ -112,7 +131,7 @@ const ListDokumenDireksi = () => {
                     overflow="hidden"
                     whiteSpace="nowrap"
                   >
-                    {akta.createdAt}
+                    {new Date(akta.createAt).toLocaleDateString('en-GB')}
                   </chakra.span>
                   <Flex>
                     <Button
@@ -132,7 +151,7 @@ const ListDokumenDireksi = () => {
                   </Flex>
                   <Flex justify={{ md: 'end' }}>
                     <ButtonGroup variant="solid" size="sm" spacing={3}>
-                      {/* <Edit id={akta.id} /> */}
+                      <EditDokumenDireksi id={akta.id} />
                       <IconButton
                         colorScheme="red"
                         variant="outline"
