@@ -1,20 +1,6 @@
 import React from 'react';
-import {
-  Box,
-  Flex,
-  Image,
-  useDisclosure,
-  Icon,
-  Collapse,
-} from '@chakra-ui/react';
-import {
-  MdBuild,
-  MdHome,
-  MdKeyboardArrowDown,
-  MdKeyboardArrowRight,
-  MdAdjust,
-  MdReceipt,
-} from 'react-icons/md';
+import { Box, Flex, Image } from '@chakra-ui/react';
+import { MdHome } from 'react-icons/md';
 import {
   IoMdCalculator,
   IoMdLogOut,
