@@ -10,10 +10,13 @@ import {
 } from 'react-icons/io';
 import NavItem from './SidebarItems';
 import { Link } from 'react-router-dom';
-
+import { useAuth } from '../login/AuthContext';
 const SidebarContent: React.FC = (props) => {
-  // const { isOpen: isReport, onToggle: onReport } = useDisclosure();
-  // const { isOpen: isClaim, onToggle: onClaim } = useDisclosure();
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout(); // Correctly call logout without arguments
+  };
 
   return (
     <Box
@@ -63,25 +66,6 @@ const SidebarContent: React.FC = (props) => {
         <Link to="/admin/akta">
           <NavItem icon={IoMdCalculator}>Akta Perusahaan</NavItem>
         </Link>
-        {/* <NavItem icon={IoMdCalculator} onClick={onReport} isActive={isReport}>
-          Akta Perusahaan
-          <Icon
-            as={isReport ? MdKeyboardArrowDown : MdKeyboardArrowRight}
-            ml="auto"
-          />
-        </NavItem>
-        <Collapse in={isReport}>
-          <Link to="/admin/akta-perusahaan">
-            <NavItem pl="12" py="2">
-              Dokumen Perusahaan
-            </NavItem>
-          </Link>
-          <Link to="/admin/akta-direksi">
-            <NavItem pl="12" py="2">
-              Dokumen Direksi
-            </NavItem>
-          </Link>
-        </Collapse> */}
         <Link to="/admin/aset-perusahaan">
           <NavItem icon={IoMdApps}>Aset Perusahaan</NavItem>
         </Link>
@@ -91,9 +75,9 @@ const SidebarContent: React.FC = (props) => {
         <Link to="/admin/materi-legal">
           <NavItem icon={IoIosAttach}>Materi Legal</NavItem>
         </Link>
-        <Link to="/logout">
-          <NavItem icon={IoMdLogOut}>Logout</NavItem>
-        </Link>
+        <NavItem icon={IoMdLogOut} onClick={handleLogout}>
+          Logout
+        </NavItem>
       </Flex>
     </Box>
   );

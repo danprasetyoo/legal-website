@@ -6,17 +6,14 @@ import {
   Button,
   FormControl,
   FormLabel,
-  Switch,
-  useColorMode,
   useColorModeValue,
   Alert,
   AlertIcon,
 } from '@chakra-ui/react';
-import { useAuth } from './AuthContext'; // Update path as needed
+import { useAuth } from './AuthContext';
 import { Navigate } from 'react-router-dom';
 
 const LoginView = () => {
-  const { toggleColorMode } = useColorMode();
   const formBackground = useColorModeValue('gray.100', 'gray.700');
   const { login, isAuthenticated } = useAuth();
 
@@ -33,8 +30,9 @@ const LoginView = () => {
     }
   };
 
+  // Redirect to /admin/akta if the user is authenticated
   if (isAuthenticated) {
-    return <Navigate to="/admin/akta" />;
+    return <Navigate to="/admin" />;
   }
 
   return (
@@ -84,18 +82,6 @@ const LoginView = () => {
         <Button colorScheme="teal" type="submit" mb={8}>
           Log In
         </Button>
-
-        <FormControl display="flex" alignItems="center">
-          <FormLabel htmlFor="dark_mode" mb="0">
-            Enable Dark Mode?
-          </FormLabel>
-          <Switch
-            id="dark_mode"
-            colorScheme="teal"
-            size="lg"
-            onChange={toggleColorMode}
-          />
-        </FormControl>
       </Flex>
     </Flex>
   );

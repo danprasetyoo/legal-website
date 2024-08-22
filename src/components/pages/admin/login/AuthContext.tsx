@@ -1,8 +1,9 @@
 import React, { createContext, useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: (username: string, password: string) => void;
+  login: () => void;
   logout: () => void;
 }
 
@@ -12,17 +13,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const navigate = useNavigate();
 
-  const login = (username: string, password: string) => {
-    if (username === 'admin' && password === 'Indore2024*') {
-      setIsAuthenticated(true);
-    } else {
-      alert('Invalid username or password');
-    }
+  const login = () => {
+    setIsAuthenticated(true);
+    // Perform any other login logic
   };
 
   const logout = () => {
     setIsAuthenticated(false);
+    navigate('/admin/login');
   };
 
   return (
@@ -32,9 +32,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-export const useAuth = () => {
+export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
