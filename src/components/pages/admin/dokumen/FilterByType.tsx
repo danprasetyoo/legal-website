@@ -13,12 +13,12 @@ const FilterByType: React.FC<FilterByTypeProps> = ({
   return (
     <Flex mb={4} justify="center">
       <Select
-        // placeholder="All"
+        placeholder="All"
         onChange={(e) => onTypeChange(e.target.value)}
         value={selectedType}
         maxW="200px"
       >
-        <option value="">All</option>
+        {/* <option value="">All</option> */}
         <option value="DIREKSI">Direksi</option>
         <option value="PERUSAHAAN">Perusahaan</option>
       </Select>
