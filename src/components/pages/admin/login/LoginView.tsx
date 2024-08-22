@@ -13,7 +13,7 @@ import {
 import { useAuth } from './AuthContext';
 import { Navigate } from 'react-router-dom';
 
-const LoginView = () => {
+const LoginView: React.FC = () => {
   const formBackground = useColorModeValue('gray.100', 'gray.700');
   const { login, isAuthenticated } = useAuth();
 
@@ -21,18 +21,17 @@ const LoginView = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (username === 'admin' && password === 'Indore2024*') {
-      login(username, password);
-    } else {
+    try {
+      await login(username, password); // Ensure this matches the `login` function signature
+    } catch (err) {
       setError('Invalid username or password');
     }
   };
 
-  // Redirect to /admin/akta if the user is authenticated
   if (isAuthenticated) {
-    return <Navigate to="/admin" />;
+    return <Navigate to="/admin/akta" />;
   }
 
   return (

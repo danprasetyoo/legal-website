@@ -1,28 +1,32 @@
-import React, { createContext, useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+// AuthContext.tsx or similar file
+
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: () => void;
+  login: (username: string, password: string) => Promise<void>;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const navigate = useNavigate();
+interface AuthProviderProps {
+  children: ReactNode;
+}
 
-  const login = () => {
-    setIsAuthenticated(true);
-    // Perform any other login logic
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const login = async (username: string, password: string): Promise<void> => {
+    if (username === 'admin' && password === 'Indore2024*') {
+      setIsAuthenticated(true);
+    } else {
+      throw new Error('Invalid username or password');
+    }
   };
 
   const logout = () => {
     setIsAuthenticated(false);
-    navigate('/admin/login');
   };
 
   return (
