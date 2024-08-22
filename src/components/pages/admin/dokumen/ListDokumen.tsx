@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import {
   Flex,
   Stack,
@@ -17,13 +16,15 @@ import {
   Grid,
   GridItem,
 } from '@chakra-ui/react';
+import axios from 'axios';
+import useSWR, { useSWRConfig } from 'swr';
 import { AiTwotoneLock } from 'react-icons/ai';
 import { BsFillTrashFill } from 'react-icons/bs';
-import useSWR, { useSWRConfig } from 'swr';
 import FilterByType from './FilterByType';
 import AddDokumenDireksi from './AddDokumen';
 import EditDokumenDireksi from './EditDokumen';
 
+// Define the fetcher function
 const fetcher = async (filter: string) => {
   const url = filter
     ? `http://localhost:5000/akta?type=${filter}`
@@ -68,23 +69,18 @@ const ListDokumenDireksi = () => {
       const response = await axios.get(
         `http://localhost:5000/documents/${id}`,
         {
-          responseType: 'blob', // Important for binary data
+          responseType: 'blob',
         }
       );
-
-      if (response.status === 200 && response.data) {
-        const url = window.URL.createObjectURL(
-          new Blob([response.data], { type: 'application/pdf' })
-        );
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', `${fileName}.pdf`); // Adjust filename if needed
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-      } else {
-        console.error('Failed to download document:', response.data);
-      }
+      const url = window.URL.createObjectURL(
+        new Blob([response.data], { type: 'application/pdf' })
+      );
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `${fileName}.pdf`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
     } catch (error) {
       console.error('Failed to download document:', error);
     }
