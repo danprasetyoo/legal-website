@@ -1,6 +1,5 @@
-// AuthContext.tsx or similar file
-
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import axios from 'axios';
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -18,14 +17,26 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const login = async (username: string, password: string): Promise<void> => {
-    if (username === 'admin' && password === 'Indore2024*') {
-      setIsAuthenticated(true);
-    } else {
+    try {
+      const response = await axios.post('http://localhost:5000/admin/login', {
+        username,
+        password,
+      });
+
+      if (response.status === 200 && response.data.token) {
+        // Store the token or set authentication state
+        localStorage.setItem('authToken', response.data.token); // Example of storing token
+        setIsAuthenticated(true);
+      } else {
+        throw new Error('Invalid username or password');
+      }
+    } catch (error) {
       throw new Error('Invalid username or password');
     }
   };
 
   const logout = () => {
+    localStorage.removeItem('authToken'); // Clear token
     setIsAuthenticated(false);
   };
 

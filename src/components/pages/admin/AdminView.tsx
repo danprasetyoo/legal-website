@@ -1,22 +1,25 @@
+import React from 'react';
 import { Box, Flex } from '@chakra-ui/react';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import { AuthProvider } from './login/AuthContext';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './login/AuthContext';
 import PrivateRoute from './login/PrivateRoute';
 import LoginView from './login/LoginView';
 import ListDokumenDireksi from './dokumen/ListDokumen';
 import SidebarContent from './sidebar/SidebarContent';
 
-export default function App() {
+const AdminView: React.FC = () => {
   const location = useLocation();
+  const { isAuthenticated } = useAuth();
 
   // Determine if the current path is the login route
   const isLoginPage = location.pathname === '/admin/login';
 
+  // Render different layouts based on authentication status
   return (
     <AuthProvider>
       <Flex direction={{ base: 'column', md: 'row' }} minHeight="100vh">
         {/* Conditionally render the sidebar */}
-        {!isLoginPage && (
+        {isAuthenticated && !isLoginPage && (
           <Box
             as="aside"
             w={{ base: 'full', md: '250px' }}
@@ -37,9 +40,12 @@ export default function App() {
               element={<PrivateRoute element={<ListDokumenDireksi />} />}
             />
             {/* Add other protected routes here */}
+            <Route path="/admin/*" element={<Navigate to="/admin/login" />} />
           </Routes>
         </Box>
       </Flex>
     </AuthProvider>
   );
-}
+};
+
+export default AdminView;

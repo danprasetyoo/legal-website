@@ -1,6 +1,6 @@
 import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from './AuthContext'; // Ensure this is the correct path
+import { Navigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 
 interface PrivateRouteProps {
   element: React.ReactElement;
@@ -8,13 +8,9 @@ interface PrivateRouteProps {
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ element }) => {
   const { isAuthenticated } = useAuth();
-  const location = useLocation();
 
-  return isAuthenticated ? (
-    element
-  ) : (
-    <Navigate to="/admin/login" state={{ from: location }} replace />
-  );
+  // If not authenticated, redirect to login page
+  return isAuthenticated ? element : <Navigate to="/admin/login" />;
 };
 
 export default PrivateRoute;
