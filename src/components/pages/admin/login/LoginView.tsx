@@ -12,32 +12,30 @@ import {
   Alert,
   AlertIcon,
 } from '@chakra-ui/react';
+import { useAuth } from './AuthContext'; // Update path as needed
+import { Navigate } from 'react-router-dom';
 
 const LoginView = () => {
   const { toggleColorMode } = useColorMode();
   const formBackground = useColorModeValue('gray.100', 'gray.700');
+  const { login, isAuthenticated } = useAuth();
 
-  // State to manage form inputs
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Function to handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Check if the credentials are correct
     if (username === 'admin' && password === 'Indore2024*') {
-      setIsAuthenticated(true);
-      setError('');
-      // Redirect to the next page or handle successful login
-      // Example: window.location.href = '/dashboard';
+      login(username, password);
     } else {
       setError('Invalid username or password');
-      setIsAuthenticated(false);
     }
   };
+
+  if (isAuthenticated) {
+    return <Navigate to="/admin/akta" />;
+  }
 
   return (
     <Flex h="100vh" alignItems="center" justifyContent="center">
@@ -52,7 +50,6 @@ const LoginView = () => {
       >
         <Heading mb={6}>Log In</Heading>
 
-        {/* Display error message */}
         {error && (
           <Alert status="error" mb={4}>
             <AlertIcon />
@@ -88,7 +85,7 @@ const LoginView = () => {
           Log In
         </Button>
 
-        {/* <FormControl display="flex" alignItems="center">
+        <FormControl display="flex" alignItems="center">
           <FormLabel htmlFor="dark_mode" mb="0">
             Enable Dark Mode?
           </FormLabel>
@@ -98,7 +95,7 @@ const LoginView = () => {
             size="lg"
             onChange={toggleColorMode}
           />
-        </FormControl> */}
+        </FormControl>
       </Flex>
     </Flex>
   );

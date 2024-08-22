@@ -1,33 +1,37 @@
 import { Box, Flex } from '@chakra-ui/react';
+import { Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './login/AuthContext';
+import PrivateRoute from './login/PrivateRoute';
+import LoginView from './login/LoginView';
+import ListDokumenDireksi from './dokumen/ListDokumen';
 import SidebarContent from './sidebar/SidebarContent';
-import AppRoutes from '../AppRoutes';
 
-export default function AdminView() {
+export default function App() {
   return (
-    <Flex
-      direction={{ base: 'column', md: 'row' }} // Stack vertically on small screens and horizontally on medium and up
-      minHeight="100vh" // Ensure full height of viewport
-    >
-      {/* Sidebar */}
-      <Box
-        as="aside"
-        w={{ base: 'full', md: '250px' }} // Full width on small screens, fixed width on medium and up
-        display={{ base: 'none', md: 'block' }} // Hide on small screens
-        bg="white"
-        p={4}
-        position="relative" // Ensure proper positioning
-      >
-        <SidebarContent />
-      </Box>
+    <AuthProvider>
+      <Flex direction={{ base: 'column', md: 'row' }} minHeight="100vh">
+        <Box
+          as="aside"
+          w={{ base: 'full', md: '250px' }}
+          display={{ base: 'none', md: 'block' }}
+          bg="white"
+          p={4}
+          position="relative"
+        >
+          <SidebarContent />
+        </Box>
 
-      {/* Main content */}
-      <Box
-        as="main"
-        flex="1" // Allow main content to take up the remaining space
-        p={4}
-      >
-        <AppRoutes />
-      </Box>
-    </Flex>
+        <Box as="main" flex="1" p={4}>
+          <Routes>
+            <Route path="/admin/login" element={<LoginView />} />
+            <Route
+              path="/admin/akta"
+              element={<PrivateRoute element={<ListDokumenDireksi />} />}
+            />
+            {/* Add other protected routes here */}
+          </Routes>
+        </Box>
+      </Flex>
+    </AuthProvider>
   );
 }
