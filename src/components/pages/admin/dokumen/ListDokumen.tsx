@@ -21,8 +21,8 @@ import { AiTwotoneLock } from 'react-icons/ai';
 import { BsFillTrashFill } from 'react-icons/bs';
 import useSWR, { useSWRConfig } from 'swr';
 import FilterByType from './FilterByType';
-import AddDokumenDireksi from './AddDokumenDireksi';
-import EditDokumenDireksi from './EditDokumenDireksi';
+import AddDokumenDireksi from './AddDokumen';
+import EditDokumenDireksi from './EditDokumen';
 
 const fetcher = async (filter: string) => {
   const url = filter

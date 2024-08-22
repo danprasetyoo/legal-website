@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import ListDokumenDireksi from './admin/dokumenDireksi/ListDokumenDireksi';
+import ListDokumenDireksi from './admin/dokumen/ListDokumen';
 
 export default function AppRoutes() {
   return (
