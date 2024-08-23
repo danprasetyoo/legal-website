@@ -31,7 +31,7 @@ const LoginView: React.FC = () => {
   };
 
   if (isAuthenticated) {
-    return <Navigate to="/admin/akta" />;
+    return <Navigate to="/dashboard" />;
   }
 
   return (
