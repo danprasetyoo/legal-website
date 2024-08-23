@@ -14,7 +14,7 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   const login = async (username: string, password: string): Promise<void> => {
     try {
@@ -24,8 +24,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       });
 
       if (response.status === 200 && response.data.token) {
-        // Store the token or set authentication state
-        localStorage.setItem('authToken', response.data.token); // Example of storing token
+        localStorage.setItem('authToken', response.data.token); // Store the token
         setIsAuthenticated(true);
       } else {
         throw new Error('Invalid username or password');
