@@ -30,6 +30,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         throw new Error('Invalid username or password');
       }
     } catch (error) {
+      console.error('Login error:', error);
       throw new Error('Invalid username or password');
     }
   };

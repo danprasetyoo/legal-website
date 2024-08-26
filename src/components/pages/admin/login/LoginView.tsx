@@ -9,7 +9,6 @@ import {
   useColorModeValue,
   Alert,
   AlertIcon,
-  Spinner,
 } from '@chakra-ui/react';
 import { useAuth } from './AuthContext';
 import { Navigate } from 'react-router-dom';
@@ -21,19 +20,13 @@ const LoginView: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(''); // Clear previous errors
-    setIsLoading(true); // Start loading state
-
     try {
       await login(username, password);
     } catch (err) {
       setError('Invalid username or password');
-    } finally {
-      setIsLoading(false); // End loading state
     }
   };
 
@@ -51,8 +44,6 @@ const LoginView: React.FC = () => {
         borderRadius={8}
         boxShadow="lg"
         onSubmit={handleSubmit}
-        maxWidth="400px"
-        w="100%"
       >
         <Heading mb={6}>Log In</Heading>
 
@@ -87,20 +78,9 @@ const LoginView: React.FC = () => {
           />
         </FormControl>
 
-        {isLoading ? (
-          <Flex justifyContent="center" mb={8}>
-            <Spinner size="lg" />
-          </Flex>
-        ) : (
-          <Button
-            colorScheme="teal"
-            type="submit"
-            mb={8}
-            isDisabled={!username || !password || isLoading}
-          >
-            Log In
-          </Button>
-        )}
+        <Button colorScheme="teal" type="submit" mb={8}>
+          Log In
+        </Button>
       </Flex>
     </Flex>
   );
