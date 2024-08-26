@@ -70,7 +70,7 @@ const LoginView: React.FC = () => {
           <FormLabel htmlFor="password">Password</FormLabel>
           <Input
             id="password"
-            placeholder="**********"
+            placeholder="********"
             type="password"
             variant="filled"
             value={password}
