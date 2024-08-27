@@ -1,19 +1,17 @@
+// Navbar.tsx
 import React from 'react';
 import {
   Box,
   Flex,
   HStack,
   IconButton,
-  Button,
   Collapse,
-  Divider,
   Text,
-  useColorModeValue,
   VStack,
-  useBreakpointValue,
   useDisclosure,
-  Link,
+  useColorModeValue,
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
 const Navbar = () => {
@@ -27,10 +25,10 @@ const Navbar = () => {
             MySite
           </Text>
           <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
-            <Link href="#home">Home</Link>
-            <Link href="#about">About</Link>
-            <Link href="#services">Services</Link>
-            <Link href="#contact">Contact</Link>
+            <Link to="/">Home</Link>
+            <Link to="/about">About</Link>
+            <Link to="/services">Services</Link>
+            <Link to="/contact">Contact</Link>
           </HStack>
         </HStack>
         <IconButton
@@ -48,11 +46,13 @@ const Navbar = () => {
           spacing={4}
           alignItems={'center'}
           display={{ base: 'flex', md: 'none' }}
+          bg={useColorModeValue('gray.100', 'gray.900')}
+          p={4}
         >
-          <Link href="#home">Home</Link>
-          <Link href="#about">About</Link>
-          <Link href="#services">Services</Link>
-          <Link href="#contact">Contact</Link>
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/services">Services</Link>
+          <Link to="/contact">Contact</Link>
         </VStack>
       </Collapse>
     </Box>
