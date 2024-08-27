@@ -14,7 +14,7 @@ import {
 import { Link } from 'react-router-dom';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
-const Navbar = () => {
+const NavbarMenus = () => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -59,4 +59,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavbarMenus;

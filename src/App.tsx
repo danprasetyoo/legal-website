@@ -1,9 +1,9 @@
 import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import { AuthProvider } from './components/pages/admin/login/AuthContext';
 import AdminView from './components/pages/admin/AdminView';
-import { ClientView } from './components/pages/client/ClientView';
+import ClientView from './components/pages/client/ClientView';
 import theme from './theme';
 
 export const App = () => (
@@ -12,7 +12,9 @@ export const App = () => (
       <AuthProvider>
         <AdminView />
       </AuthProvider>
-      <ClientView />
+      <Routes>
+        <Route path="/" element={<ClientView />} />
+      </Routes>
     </Router>
   </ChakraProvider>
 );
