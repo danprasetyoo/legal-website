@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Flex } from '@chakra-ui/react';
-import NavbarMenus from './navbar/Navbar';
+import NavbarMenus from './navbar/NavbarMenus';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (

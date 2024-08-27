@@ -1,4 +1,3 @@
-// Carousel.tsx
 import React, { useState } from 'react';
 import {
   Box,
@@ -62,10 +61,7 @@ const Carousel: React.FC = () => {
         animate="center"
         exit="exit"
         custom={direction}
-        // transition={{
-        //   duration: 0.5,
-        //   ease: 'easeInOut',
-        // }} // Fix the transition property here
+        transition="all 0.5s ease-in-out"
         width="full"
         height="full"
         backgroundImage={`url(${slides[index].image})`}

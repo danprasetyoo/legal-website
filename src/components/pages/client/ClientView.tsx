@@ -1,7 +1,10 @@
 import React from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import NavbarMenus from './navbar/Navbar'; // Import your Navbar component
+import NavbarMenus from './navbar/NavbarMenus';
+import Layout from './Layout';
+import Carousel from './carousel/Carousel';
+// import HomePage from './viewPages/Homepage';
 
 const ClientView: React.FC = () => {
   return (
@@ -24,15 +27,8 @@ const ClientView: React.FC = () => {
       <Box as="main" flex="1" p={4} mt={4}>
         <Routes>
           {/* Example routes */}
+          <Route path="/" element={<Carousel />} />
           {/* <Route
-            path="/"
-            element={
-              <Layout>
-                <HomePage />
-              </Layout>
-            }
-          />
-          <Route
             path="/about"
             element={
               <Layout>
