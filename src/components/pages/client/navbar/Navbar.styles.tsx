@@ -1,4 +1,4 @@
-import { SystemStyleObject } from '@chakra-ui/react';
+import { color, SystemStyleObject } from '@chakra-ui/react';
 
 export const navbarStyles = {
   container: {
