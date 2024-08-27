@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Flex,
@@ -8,11 +8,10 @@ import {
   Image,
   VStack,
   useDisclosure,
-  useColorModeValue,
   Link as ChakraLink,
-  Collapse as ChakraCollapse,
   Stack,
   Icon,
+  CollapseOptions,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { Link, useLocation } from 'react-router-dom';
@@ -23,25 +22,45 @@ const NavbarMenus: React.FC = () => {
   const { isOpen, onToggle } = useDisclosure();
   const location = useLocation();
   const [isDokumenOpen, setIsDokumenOpen] = useState(false);
+  const [bgColor, setBgColor] = useState('transparent');
 
   const toggleDokumen = () => setIsDokumenOpen(!isDokumenOpen);
 
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      setBgColor('whiteAlpha.900'); // Change background to white alpha when scrolled
+    } else {
+      setBgColor('transparent'); // Reset to transparent when at the top
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <Box
-      bg={useColorModeValue(navbarStyles.container.bg, 'gray.900')}
+      bg={bgColor} // Apply the background color based on scroll position
       px={navbarStyles.container.px}
       py={navbarStyles.container.py}
-      boxShadow={navbarStyles.container.boxShadow}
-      borderBottomWidth={navbarStyles.container.borderBottomWidth}
+      boxShadow={bgColor === 'whiteAlpha.900' ? 'md' : 'none'} // Add shadow when background color is not transparent
+      position="fixed" // Make the navbar fixed to the top
+      top={0} // Ensure it's positioned at the top of the viewport
+      width="full" // Full width to cover the top
+      zIndex={1000} // Ensure it stays on top of other elements
+      backdropFilter="blur(0px)" // Apply blur effect
+      transition="background-color 0.3s ease, box-shadow 0.3s ease" // Smooth transition for background color and shadow
     >
-      <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+      <Flex h={16} alignItems={'center'} justifyContent={'space-between'} p={4}>
         {/* Logo */}
         <HStack spacing={8} alignItems={'center'}>
           <Link to="/">
             <Image
-              src={IndonesiaRe} // Path to your logo image
+              src={IndonesiaRe} // Ensure the path is correct
               alt="Company Logo"
-              {...navbarStyles.logo}
+              width="80px" // Set the width of the logo
+              height="50px" // Set the height of the logo
             />
           </Link>
         </HStack>
@@ -86,7 +105,7 @@ const NavbarMenus: React.FC = () => {
                 }}
               />
             </ChakraLink>
-            <ChakraCollapse in={isDokumenOpen}>
+            <Collapse in={isDokumenOpen}>
               <Stack {...navbarStyles.dropdown}>
                 <ChakraLink
                   as={Link}
@@ -128,7 +147,7 @@ const NavbarMenus: React.FC = () => {
                   SK SOP Legal
                 </ChakraLink>
               </Stack>
-            </ChakraCollapse>
+            </Collapse>
           </Box>
 
           <ChakraLink
@@ -209,7 +228,7 @@ const NavbarMenus: React.FC = () => {
                 }}
               />
             </ChakraLink>
-            <ChakraCollapse in={isDokumenOpen}>
+            <Collapse in={isDokumenOpen}>
               <VStack {...navbarStyles.mobileMenu}>
                 <ChakraLink
                   as={Link}
@@ -251,7 +270,7 @@ const NavbarMenus: React.FC = () => {
                   SK SOP Legal
                 </ChakraLink>
               </VStack>
-            </ChakraCollapse>
+            </Collapse>
           </Box>
 
           <ChakraLink

@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
-import {
-  Box,
-  Button,
-  IconButton,
-  useBreakpointValue,
-  useColorModeValue,
-} from '@chakra-ui/react';
-import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import React, { useState, useEffect } from 'react';
+import { Box, useBreakpointValue } from '@chakra-ui/react';
 import { motion, Variants } from 'framer-motion';
+import { carouselStyles } from './Carousel.styles';
+import Slide1 from '../../../assets/client/carousel.jpg';
+import Slide2 from '../../../assets/client/carousel_2.jpg';
 
 interface Slide {
   id: number;
@@ -16,9 +12,8 @@ interface Slide {
 }
 
 const slides: Slide[] = [
-  { id: 1, image: '/path/to/image1.jpg', alt: 'Image 1' },
-  { id: 2, image: '/path/to/image2.jpg', alt: 'Image 2' },
-  { id: 3, image: '/path/to/image3.jpg', alt: 'Image 3' },
+  { id: 1, image: Slide1, alt: 'Image 1' },
+  { id: 2, image: Slide2, alt: 'Image 2' },
   // Add more slides as needed
 ];
 
@@ -42,6 +37,14 @@ const Carousel: React.FC = () => {
   const [direction, setDirection] = useState(1);
   const isMobile = useBreakpointValue({ base: true, md: false });
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNext();
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(interval); // Clean up the interval on component unmount
+  }, [index]);
+
   const handleNext = () => {
     setDirection(1);
     setIndex((prevIndex) => (prevIndex + 1) % slides.length);
@@ -53,7 +56,7 @@ const Carousel: React.FC = () => {
   };
 
   return (
-    <Box position="relative" width="full" overflow="hidden" height="300px">
+    <Box sx={carouselStyles.container}>
       <Box
         as={motion.div}
         variants={variants}
@@ -62,63 +65,15 @@ const Carousel: React.FC = () => {
         exit="exit"
         custom={direction}
         transition="all 0.5s ease-in-out"
-        width="full"
-        height="full"
-        backgroundImage={`url(${slides[index].image})`}
-        backgroundSize="cover"
-        backgroundPosition="center"
-        position="relative"
+        sx={carouselStyles.slide}
       >
-        {!isMobile && (
-          <>
-            <IconButton
-              aria-label="Previous Slide"
-              icon={<ChevronLeftIcon />}
-              position="absolute"
-              top="50%"
-              left="10px"
-              transform="translateY(-50%)"
-              colorScheme="teal"
-              onClick={handlePrev}
-              zIndex={1}
-            />
-            <IconButton
-              aria-label="Next Slide"
-              icon={<ChevronRightIcon />}
-              position="absolute"
-              top="50%"
-              right="10px"
-              transform="translateY(-50%)"
-              colorScheme="teal"
-              onClick={handleNext}
-              zIndex={1}
-            />
-          </>
-        )}
-        {/* Mobile navigation controls (optional) */}
-        {isMobile && (
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            position="absolute"
-            bottom="10px"
-            width="full"
-            px={4}
-          >
-            <IconButton
-              aria-label="Previous Slide"
-              icon={<ChevronLeftIcon />}
-              colorScheme="teal"
-              onClick={handlePrev}
-            />
-            <IconButton
-              aria-label="Next Slide"
-              icon={<ChevronRightIcon />}
-              colorScheme="teal"
-              onClick={handleNext}
-            />
-          </Box>
-        )}
+        <Box
+          sx={{
+            ...carouselStyles.slideImage,
+            backgroundImage: `url(${slides[index].image})`,
+          }}
+        />
+        {/* Removed button elements and mobile buttons */}
       </Box>
     </Box>
   );

@@ -3,8 +3,8 @@ import { Box, Flex } from '@chakra-ui/react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import NavbarMenus from './navbar/NavbarMenus';
 import Layout from './Layout';
-import Carousel from './carousel/Carousel';
-// import HomePage from './viewPages/Homepage';
+// import Carousel from './carousel/Carousel';
+import HomePage from './viewPages/Homepage';
 
 const ClientView: React.FC = () => {
   return (
@@ -12,9 +12,7 @@ const ClientView: React.FC = () => {
       {/* Navbar at the top */}
       <Box
         as="header"
-        bg="white"
-        p={4}
-        boxShadow="md"
+        bg="transparant"
         position="sticky"
         top={0}
         zIndex={1}
@@ -24,10 +22,10 @@ const ClientView: React.FC = () => {
       </Box>
 
       {/* Main content area */}
-      <Box as="main" flex="1" p={4} mt={4}>
+      <Box as="main" flex="1">
         <Routes>
           {/* Example routes */}
-          <Route path="/" element={<Carousel />} />
+          <Route path="/" element={<HomePage />} />
           {/* <Route
             path="/about"
             element={

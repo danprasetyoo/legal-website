@@ -1,91 +1,86 @@
-import { color, SystemStyleObject } from '@chakra-ui/react';
-
 export const navbarStyles = {
   container: {
-    bg: 'white', // Background color for the navbar
-    px: 6, // Horizontal padding
-    py: 3, // Increased padding for better spacing
-    boxShadow: 'md', // Subtle shadow
-    borderBottomWidth: '1px',
+    px: 6,
+    py: 3,
   },
   logo: {
-    width: '100px', // Set a specific width
-    height: 'auto', // Maintain aspect ratio
-    maxWidth: '100%', // Ensure logo doesn't exceed container width
+    width: '80px',
+    height: '90px',
+    maxWidth: '100%',
   },
   link: {
-    fontSize: 'lg',
-    fontWeight: 'bold', // Bold font for prominence
-    color: 'blue.700', // Primary text color
-    position: 'relative', // Position relative for the pseudo-element
-    display: 'inline-block', // Ensure the underline animation works
+    fontSize: 'md',
+    fontWeight: 'bold',
+    color: 'gray.600',
+    position: 'relative',
+    display: 'inline-block',
     _before: {
-      content: '""', // Required for pseudo-element
+      content: '""',
       position: 'absolute',
       left: 0,
-      bottom: -2, // Space below the text
-      width: '0%', // Default width for non-active links
-      height: '3px', // Slightly thicker underline
-      bg: 'red.500', // Underline color for better contrast
-      transition: 'width 0.3s ease, left 0.3s ease', // Smooth transition for width and position
+      bottom: -2,
+      width: '0%',
+      height: '3px',
+      bg: 'red.500',
+      transition: 'width 0.3s ease, left 0.3s ease',
     },
     _hover: {
       textDecoration: 'none',
-      color: 'red.500', // Color on hover
+      color: 'red.500',
       _before: {
-        width: '100%', // Full width on hover
-        left: 0, // Align underline with the text
+        width: '100%',
+        left: 0,
       },
     },
     _activeLink: {
-      color: 'red.500', // Color for active links
+      color: 'red.500',
       _before: {
-        width: '100%', // Full width for active links
-        left: 0, // Align underline with the text
+        width: '100%',
+        left: 0,
       },
     },
   },
   navLinkContainer: {
-    spacing: 6, // Increased spacing between links
-    pr: 6, // Right padding to create space on the right edge
+    spacing: 6,
+    pr: 6,
   },
   dropdown: {
     bg: 'white',
-    boxShadow: 'md', // Subtle shadow for the dropdown
-    borderRadius: 'md', // Rounded corners
+    boxShadow: 'md',
+    borderRadius: 'md',
     p: 4,
-    mt: 2, // Margin-top for spacing below the parent link
-    position: 'absolute', // Use absolute positioning for dropdown
-    zIndex: 10, // Ensure dropdown is on top
-    w: '240px', // Wider dropdown for better readability
+    mt: 2,
+    position: 'absolute',
+    zIndex: 10,
+    w: '240px',
     border: '1px solid',
-    borderColor: 'blue.300', // Border color for the dropdown
+    borderColor: 'blue.300',
   },
   dropdownItem: {
-    display: 'block', // Ensures each item is a block-level element
-    padding: 3, // Increased padding for each dropdown item
-    borderRadius: 'md', // Rounded corners for items
-    color: 'blue.700', // Text color for dropdown items
+    display: 'block',
+    padding: 3,
+    borderRadius: 'md',
+    color: 'blue.700',
     _hover: {
-      bg: 'blue.50', // Background color on hover
-      textDecoration: 'none', // Ensure no underline on hover
+      bg: 'blue.50',
+      textDecoration: 'none',
     },
   },
   dropdownIcon: {
-    ml: 2, // Margin-left to space the icon from the text
-    color: 'blue.700', // Icon color
-    transition: 'transform 0.3s ease', // Smooth rotation animation
+    ml: 2,
+    color: 'blue.700',
+    transition: 'transform 0.3s ease',
   },
   dropdownIconOpen: {
-    transform: 'rotate(90deg)', // Rotate the icon when open
+    transform: 'rotate(90deg)',
   },
   mobileMenu: {
-    spacing: 5, // Increased spacing for mobile menu items
+    spacing: 5,
     alignItems: 'center',
     bg: 'white',
-    p: 5, // Increased padding for mobile menu
-    px: 6, // Horizontal padding
+    p: 5,
+    px: 6,
     borderTopWidth: '1px',
-    borderTopColor: 'blue.300', // Border color for mobile menu
+    borderTopColor: 'blue.300',
   },
 } as const;
