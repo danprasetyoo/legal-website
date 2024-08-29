@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Box, useBreakpointValue } from '@chakra-ui/react';
 import { motion, Variants } from 'framer-motion';
+import Slide1 from '../../../../assets/client/carousel.jpg';
+import Slide2 from '../../../../assets/client/carousel_2.jpg';
 import { carouselStyles } from './Carousel.styles';
-import Slide1 from '../../../assets/client/carousel.jpg';
-import Slide2 from '../../../assets/client/carousel_2.jpg';
 
 interface Slide {
   id: number;
@@ -14,7 +14,6 @@ interface Slide {
 const slides: Slide[] = [
   { id: 1, image: Slide1, alt: 'Image 1' },
   { id: 2, image: Slide2, alt: 'Image 2' },
-  // Add more slides as needed
 ];
 
 const variants: Variants = {
@@ -40,9 +39,9 @@ const Carousel: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       handleNext();
-    }, 5000); // Change slide every 5 seconds
+    }, 5000);
 
-    return () => clearInterval(interval); // Clean up the interval on component unmount
+    return () => clearInterval(interval);
   }, [index]);
 
   const handleNext = () => {
@@ -67,13 +66,14 @@ const Carousel: React.FC = () => {
         transition="all 0.5s ease-in-out"
         sx={carouselStyles.slide}
       >
-        <Box
-          sx={{
-            ...carouselStyles.slideImage,
-            backgroundImage: `url(${slides[index].image})`,
-          }}
-        />
-        {/* Removed button elements and mobile buttons */}
+        {slides.map((slide, i) => (
+          <Box
+            key={slide.id}
+            sx={carouselStyles.slideImage}
+            style={{ backgroundImage: `url(${slide.image})` }}
+            display={i === index ? 'block' : 'none'}
+          />
+        ))}
       </Box>
     </Box>
   );

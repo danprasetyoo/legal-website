@@ -27,33 +27,33 @@ export const carouselStyles = {
     left: 0,
   },
   // Remove button styles
-  // button: {
-  //   position: 'absolute',
-  //   top: '50%',
-  //   transform: 'translateY(-50%)',
-  //   colorScheme: 'teal',
-  //   size: 'lg',
-  //   zIndex: 1,
-  //   bg: 'transparent',
-  //   border: '2px solid',
-  //   borderColor: 'teal.500',
-  //   _hover: {
-  //     bg: 'rgba(0, 0, 0, 0.3)',
-  //   },
-  // },
-  // prevButton: {
-  //   left: '20px',
-  // },
-  // nextButton: {
-  //   right: '20px',
-  // },
-  // mobileButtonsContainer: {
-  //   display: 'flex',
-  //   justifyContent: 'space-between',
-  //   position: 'absolute',
-  //   bottom: '10px',
-  //   width: 'full',
-  //   px: 4,
-  //   p: 0,
-  // },
+  button: {
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    colorScheme: 'teal',
+    size: 'lg',
+    zIndex: 1,
+    bg: 'transparent',
+    border: '2px solid',
+    borderColor: 'teal.500',
+    _hover: {
+      bg: 'rgba(0, 0, 0, 0.3)',
+    },
+  },
+  prevButton: {
+    left: '20px',
+  },
+  nextButton: {
+    right: '20px',
+  },
+  mobileButtonsContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    position: 'absolute',
+    bottom: '10px',
+    width: 'full',
+    px: 4,
+    p: 0,
+  },
 };

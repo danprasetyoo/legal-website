@@ -12,6 +12,26 @@ const theme = extendTheme({
     lg: '18px',
     xl: '20px',
   },
+  colors: {
+    primary: {
+      light: '#E0F2F1', // Light color
+      main: '#004D40', // Main color
+      dark: '#00332B', // Dark color
+    },
+    secondary: {
+      light: '#FFE0B2',
+      main: '#FF9800',
+      dark: '#F57C00',
+    },
+    background: {
+      light: '#FAFAFA',
+      dark: '#303030',
+    },
+    text: {
+      light: '#000000',
+      dark: '#FFFFFF',
+    },
+  },
 });
 
 export default theme;
