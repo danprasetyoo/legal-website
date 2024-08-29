@@ -22,19 +22,21 @@ const Footer: React.FC = () => {
 
   return (
     <Box
-      bg={colors.background.dark}
-      color={colors.text.light}
+      bg={colors.background.light}
+      color={colors.text.black}
       py={8}
       px={{ base: 4, md: 8 }}
+      borderTopWidth={5}
+      borderColor={colors.border}
     >
       <Flex
         direction={{ base: 'column', md: 'row' }}
         justifyContent="space-between"
-        alignItems="center"
+        alignItems="stretch"
         mb={8}
       >
         {/* Footer Navigation */}
-        <Stack spacing={4} mb={{ base: 4, md: 0 }}>
+        <Stack spacing={4} flex="1" mb={{ base: 4, md: 0 }} pl={4}>
           <Text fontWeight="bold" fontSize="lg">
             Navigation
           </Text>
@@ -69,7 +71,9 @@ const Footer: React.FC = () => {
             </ChakraLink>
           </Stack>
         </Stack>
-        <Stack spacing={4} mb={{ base: 4, md: 0 }}>
+
+        {/* Contact Us */}
+        <Stack spacing={4} flex="1" mb={{ base: 4, md: 0 }}>
           <Text fontWeight="bold" fontSize="lg">
             Contact Us
           </Text>
@@ -93,7 +97,7 @@ const Footer: React.FC = () => {
         </Stack>
 
         {/* Social Media Links */}
-        <Stack spacing={4} alignItems="center">
+        <Stack spacing={4} alignItems="center" flex="1">
           <Text fontWeight="bold" fontSize="lg">
             Follow Us
           </Text>
@@ -114,14 +118,7 @@ const Footer: React.FC = () => {
         </Stack>
       </Flex>
 
-      <Flex
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        borderTopWidth={1}
-        borderColor={colors.border}
-        pt={4}
-      >
+      <Flex direction="row" justifyContent="center" alignItems="center" pt={4}>
         <Text fontSize="sm">
           &copy; {new Date().getFullYear()} Your Company. All rights reserved.
         </Text>

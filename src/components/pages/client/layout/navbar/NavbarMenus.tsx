@@ -22,17 +22,17 @@ const NavbarMenus: React.FC = () => {
   const location = useLocation();
   const [isDokumenOpen, setIsDokumenOpen] = useState(false);
   const [bgColor, setBgColor] = useState('transparent');
-  const [linkColor, setLinkColor] = useState('white'); // State to manage link color
+  const [linkColor, setLinkColor] = useState('white');
 
   const toggleDokumen = () => setIsDokumenOpen(!isDokumenOpen);
 
   const handleScroll = () => {
     if (window.scrollY > 200) {
-      setBgColor('white'); // Change background to white when scrolled
-      setLinkColor('black'); // Change font color to black when scrolled
+      setBgColor('white');
+      setLinkColor('black');
     } else {
-      setBgColor('transparent'); // Reset to transparent when at the top
-      setLinkColor('white'); // Reset font color to white when at the top
+      setBgColor('transparent');
+      setLinkColor('white');
     }
   };
 
@@ -43,26 +43,26 @@ const NavbarMenus: React.FC = () => {
 
   return (
     <Box
-      bg={bgColor} // Apply the background color based on scroll position
+      bg={bgColor}
       px={navbarStyles.container.px}
       py={navbarStyles.container.py}
-      boxShadow={bgColor === 'white' ? 'md' : 'none'} // Add shadow when background color is not transparent
-      position="fixed" // Make the navbar fixed to the top
-      top={0} // Ensure it's positioned at the top of the viewport
-      width="full" // Full width to cover the top
-      zIndex={1000} // Ensure it stays on top of other elements
-      backdropFilter="blur(0px)" // Apply blur effect
-      transition="background-color 0.3s ease, box-shadow 0.3s ease" // Smooth transition for background color and shadow
+      boxShadow={bgColor === 'white' ? 'md' : 'none'}
+      position="fixed"
+      top={0}
+      width="full"
+      zIndex={1000}
+      backdropFilter="blur(0px)"
+      transition="background-color 0.3s ease, box-shadow 0.3s ease"
     >
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'} p={4}>
         {/* Logo */}
         <HStack spacing={8} alignItems={'center'}>
           <Link to="/">
             <Image
-              src={IndonesiaRe} // Ensure the path is correct
+              src={IndonesiaRe}
               alt="Company Logo"
-              width="80px" // Set the width of the logo
-              height="50px" // Set the height of the logo
+              width="80px"
+              height="50px"
             />
           </Link>
         </HStack>
@@ -79,7 +79,7 @@ const NavbarMenus: React.FC = () => {
             sx={{
               ...navbarStyles.link,
               color: linkColor,
-              fontWeight: 'bold', // Make font slightly bold
+              fontWeight: 'bold',
               ...(location.pathname === '/'
                 ? navbarStyles.link._activeLink
                 : {}),
@@ -96,7 +96,7 @@ const NavbarMenus: React.FC = () => {
               sx={{
                 ...navbarStyles.link,
                 color: linkColor,
-                fontWeight: 'bold', // Make font slightly bold
+                fontWeight: 'bold',
                 ...(location.pathname.startsWith('/dokumen')
                   ? navbarStyles.link._activeLink
                   : {}),
@@ -120,7 +120,7 @@ const NavbarMenus: React.FC = () => {
                     ...navbarStyles.link,
                     ...navbarStyles.dropdownItem,
                     color: linkColor,
-                    fontWeight: 'bold', // Make font slightly bold
+                    fontWeight: 'bold',
                     ...(location.pathname === '/dokumen/akta'
                       ? navbarStyles.link._activeLink
                       : {}),
@@ -135,7 +135,7 @@ const NavbarMenus: React.FC = () => {
                     ...navbarStyles.link,
                     ...navbarStyles.dropdownItem,
                     color: linkColor,
-                    fontWeight: 'bold', // Make font slightly bold
+                    fontWeight: 'bold',
                     ...(location.pathname === '/dokumen/aset'
                       ? navbarStyles.link._activeLink
                       : {}),
@@ -150,7 +150,7 @@ const NavbarMenus: React.FC = () => {
                     ...navbarStyles.link,
                     ...navbarStyles.dropdownItem,
                     color: linkColor,
-                    fontWeight: 'bold', // Make font slightly bold
+                    fontWeight: 'bold',
                     ...(location.pathname === '/dokumen/sk-sop-legal'
                       ? navbarStyles.link._activeLink
                       : {}),
@@ -168,7 +168,7 @@ const NavbarMenus: React.FC = () => {
             sx={{
               ...navbarStyles.link,
               color: linkColor,
-              fontWeight: 'bold', // Make font slightly bold
+              fontWeight: 'bold',
               ...(location.pathname === '/materi-legal'
                 ? navbarStyles.link._activeLink
                 : {}),
@@ -183,7 +183,7 @@ const NavbarMenus: React.FC = () => {
             sx={{
               ...navbarStyles.link,
               color: linkColor,
-              fontWeight: 'bold', // Make font slightly bold
+              fontWeight: 'bold',
               ...(location.pathname === '/profil-legal'
                 ? navbarStyles.link._activeLink
                 : {}),
@@ -217,7 +217,7 @@ const NavbarMenus: React.FC = () => {
             sx={{
               ...navbarStyles.link,
               color: linkColor,
-              fontWeight: 'bold', // Make font slightly bold
+              fontWeight: 'bold',
               ...(location.pathname === '/'
                 ? navbarStyles.link._activeLink
                 : {}),
@@ -233,7 +233,7 @@ const NavbarMenus: React.FC = () => {
               sx={{
                 ...navbarStyles.link,
                 color: linkColor,
-                fontWeight: 'bold', // Make font slightly bold
+                fontWeight: 'bold',
                 ...(location.pathname.startsWith('/dokumen')
                   ? navbarStyles.link._activeLink
                   : {}),
@@ -257,7 +257,7 @@ const NavbarMenus: React.FC = () => {
                     ...navbarStyles.link,
                     ...navbarStyles.dropdownItem,
                     color: linkColor,
-                    fontWeight: 'bold', // Make font slightly bold
+                    fontWeight: 'bold',
                     ...(location.pathname === '/dokumen/akta'
                       ? navbarStyles.link._activeLink
                       : {}),
@@ -272,7 +272,7 @@ const NavbarMenus: React.FC = () => {
                     ...navbarStyles.link,
                     ...navbarStyles.dropdownItem,
                     color: linkColor,
-                    fontWeight: 'bold', // Make font slightly bold
+                    fontWeight: 'bold',
                     ...(location.pathname === '/dokumen/aset'
                       ? navbarStyles.link._activeLink
                       : {}),
@@ -287,7 +287,7 @@ const NavbarMenus: React.FC = () => {
                     ...navbarStyles.link,
                     ...navbarStyles.dropdownItem,
                     color: linkColor,
-                    fontWeight: 'bold', // Make font slightly bold
+                    fontWeight: 'bold',
                     ...(location.pathname === '/dokumen/sk-sop-legal'
                       ? navbarStyles.link._activeLink
                       : {}),
@@ -305,7 +305,7 @@ const NavbarMenus: React.FC = () => {
             sx={{
               ...navbarStyles.link,
               color: linkColor,
-              fontWeight: 'bold', // Make font slightly bold
+              fontWeight: 'bold',
               ...(location.pathname === '/materi-legal'
                 ? navbarStyles.link._activeLink
                 : {}),
@@ -320,7 +320,7 @@ const NavbarMenus: React.FC = () => {
             sx={{
               ...navbarStyles.link,
               color: linkColor,
-              fontWeight: 'bold', // Make font slightly bold
+              fontWeight: 'bold',
               ...(location.pathname === '/profil-legal'
                 ? navbarStyles.link._activeLink
                 : {}),

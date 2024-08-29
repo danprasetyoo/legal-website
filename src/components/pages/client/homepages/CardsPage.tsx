@@ -58,7 +58,7 @@ const CardsPage: React.FC = () => {
   return (
     <Box
       p={6}
-      bg={useColorModeValue('gray.50', 'gray.800')} // Page background color
+      bg={useColorModeValue('gray.50', 'gray.800')}
       // minH="100vh" // Ensure full viewport height
     >
       <Heading as="h1" size="2xl" mb={8} textAlign="center">

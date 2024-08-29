@@ -32,11 +32,6 @@ const SeparatorPage: React.FC = () => {
           TUJUAN MEMBANTU BISNIS PERUSAHAAN SESUAI DENGAN GOOD CORPORATE
           GOVERNANCE
         </Heading>
-        {/* <Text fontSize={{ base: 'md', md: 'lg' }} p={3}>
-          Menyediakan panduan dan solusi untuk meningkatkan praktik corporate
-          governance yang baik dalam bisnis perusahaan, memastikan transparansi,
-          akuntabilitas, dan kinerja yang berkelanjutan.
-        </Text> */}
       </Flex>
     </Flex>
   );
