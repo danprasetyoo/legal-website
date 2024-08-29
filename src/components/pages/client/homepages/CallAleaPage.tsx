@@ -20,7 +20,7 @@ const CallAleaPage: React.FC = () => {
       direction={{ base: 'column', md: 'row' }}
       align="center" // Center items horizontally
       justify="center" // Center items vertically
-      height="80vh"
+      height="60vh"
       p={4}
       bg="background.light"
       gap={6}
