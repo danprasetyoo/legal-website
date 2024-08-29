@@ -1,5 +1,12 @@
 import React from 'react';
-import { Flex, Box, Text, Image, useBreakpointValue } from '@chakra-ui/react';
+import {
+  Flex,
+  Box,
+  Text,
+  Image,
+  useBreakpointValue,
+  Link,
+} from '@chakra-ui/react';
 import AleaIcon from '../../../assets/client/pngwing.com (3).png';
 import Arrow from '../../../assets/client/pngwing.com (4).png';
 
@@ -26,12 +33,22 @@ const CallAleaPage: React.FC = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Image
-          src={AleaIcon}
-          alt="Robot"
-          boxSize={imageSize}
-          objectFit="contain"
-        />
+        <Link
+          href="https://example.com" // Ganti dengan URL yang sesuai
+          isExternal
+          _hover={{
+            transform: 'scale(1.1)', // Memperbesar gambar saat hover
+            transition: 'transform 0.3s ease', // Animasi transisi
+          }}
+        >
+          <Image
+            src={AleaIcon}
+            alt="Robot"
+            boxSize={imageSize}
+            objectFit="contain"
+            cursor="pointer" // Menambahkan pointer cursor saat hover
+          />
+        </Link>
       </Box>
       <Flex
         direction="column"
