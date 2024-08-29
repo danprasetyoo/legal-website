@@ -1,12 +1,12 @@
 import React from 'react';
-import { Flex, Heading, Text } from '@chakra-ui/react';
+import { Flex, Heading } from '@chakra-ui/react';
 
 const SeparatorPage: React.FC = () => {
   return (
     <Flex
       position="relative"
       width="full"
-      height="350px"
+      height="450px"
       backgroundImage="url('https://cdn.antaranews.com/cache/1200x800/2024/03/11/Foto-Gedung-Indonesia-Re-1.jpg')"
       backgroundSize="cover"
       backgroundPosition="center"

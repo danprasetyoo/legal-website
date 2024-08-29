@@ -24,11 +24,11 @@ const theme = extendTheme({
       dark: '#F57C00',
     },
     background: {
-      light: '#FAFAFA',
+      light: '#FFFFFF',
       dark: '#303030',
     },
     text: {
-      light: '#000000',
+      light: '#F0F0F0',
       dark: '#FFFFFF',
     },
   },

@@ -10,21 +10,25 @@ const HomePage: React.FC = () => {
   const containerPadding = useBreakpointValue({ base: 4, md: 8, lg: 12 });
 
   return (
-    <Box>
+    <Box bg="#FFFFFF">
       <Carousel />
-      <Container maxW="container.xl" p={containerPadding} mt={8} mb={12}>
+      <Container
+        maxW="container.xl"
+        p={containerPadding}
+        bg="#FFFFFF" // Background color set to white
+        mt={8}
+        mb={12}
+      >
         <PelayananLegal />
       </Container>
-      <Box bg="background.light" py={12}>
-        {/* <Container maxW="container.xl" p={containerPadding}> */}
+      <Box bg="#FFFFFF" py={12}>
         <SeparatorPage />
-        {/* </Container> */}
       </Box>
-      <Container maxW="container.xl" p={containerPadding} mt={12}>
+      <Container maxW="container.xl" bg="#FFFFFF" p={containerPadding} mt={12}>
         <CallAleaPage />
       </Container>
-      <Box bg="background.light" py={12}>
-        <Container maxW="container.xl" p={containerPadding}>
+      <Box bg="#FFFFFF" py={12}>
+        <Container maxW="container.xl" p={containerPadding} bg="#FFFFFF">
           <CardsPage />
         </Container>
       </Box>

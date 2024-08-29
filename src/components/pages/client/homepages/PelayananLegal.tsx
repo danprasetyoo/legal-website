@@ -6,6 +6,7 @@ import {
   SimpleGrid,
   useBreakpointValue,
   useTheme,
+  Image,
 } from '@chakra-ui/react';
 
 const services = [
@@ -14,18 +15,24 @@ const services = [
     title: 'Pengajuan Legal Opinion',
     description:
       'Ajukan legal opinion untuk mendapatkan panduan hukum terkait isu atau keputusan yang Anda hadapi.',
+    imageUrl:
+      'https://htmlcolorcodes.com/assets/images/colors/baby-blue-color-solid-background-1920x1080.png', // Tambahkan URL gambar
   },
   {
     id: 2,
     title: 'Review Dokumen',
     description:
       'Dapatkan tinjauan mendalam terhadap dokumen hukum Anda untuk memastikan kepatuhan dan kelengkapan.',
+    imageUrl:
+      'https://htmlcolorcodes.com/assets/images/colors/baby-blue-color-solid-background-1920x1080.png', // Tambahkan URL gambar
   },
   {
     id: 3,
     title: 'Konsultasi Legal',
     description:
       'Konsultasikan masalah hukum Anda dengan ahli kami untuk solusi yang tepat dan efektif.',
+    imageUrl:
+      'https://htmlcolorcodes.com/assets/images/colors/red-color-solid-background-1920x1080.png', // Tambahkan URL gambar
   },
 ];
 
@@ -38,7 +45,9 @@ const PelayananLegal: React.FC = () => {
       maxW="1200px"
       width="100%"
       minH="80vh"
-      bg={colors.primary.light}
+      bgSize="cover"
+      bgPosition="center"
+      bgRepeat="no-repeat"
       borderRadius="md"
       p={{ base: 6, md: 8, lg: 10 }}
       display="flex"
@@ -71,6 +80,14 @@ const PelayananLegal: React.FC = () => {
             alignItems="center"
             textAlign="center"
           >
+            <Image
+              src={service.imageUrl} // Gunakan URL gambar dari data layanan
+              alt={service.title}
+              borderRadius="md"
+              boxSize={{ base: '150px', md: '250px' }} // Sesuaikan ukuran gambar
+              objectFit="cover"
+              mb={4}
+            />
             <Box>
               <Heading
                 fontSize={{ base: 'lg', md: 'xl' }}
