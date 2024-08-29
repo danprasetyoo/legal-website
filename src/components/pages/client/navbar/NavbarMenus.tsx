@@ -27,7 +27,7 @@ const NavbarMenus: React.FC = () => {
   const toggleDokumen = () => setIsDokumenOpen(!isDokumenOpen);
 
   const handleScroll = () => {
-    if (window.scrollY > 50) {
+    if (window.scrollY > 200) {
       setBgColor('whiteAlpha.900'); // Change background to white alpha when scrolled
     } else {
       setBgColor('transparent'); // Reset to transparent when at the top

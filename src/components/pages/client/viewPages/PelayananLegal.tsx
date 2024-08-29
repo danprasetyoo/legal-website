@@ -44,8 +44,9 @@ const PelayananLegal: React.FC = () => {
       display="flex"
       alignItems="center"
       justifyContent="center"
+      minHeight="100vh"
     >
-      <Box
+      {/* <Box
         position="absolute"
         top={0}
         left={0}
@@ -55,7 +56,7 @@ const PelayananLegal: React.FC = () => {
         backgroundImage="linear-gradient(135deg, rgba(0, 0, 0, 5.05) 25%, transparent 25%), linear-gradient(-135deg, rgba(0, 0, 0, 0.05) 25%, transparent 25%)"
         backgroundSize="60px 60px"
         backgroundPosition="0 0, 20px 50px"
-      />
+      /> */}
       <Box
         maxW="1200px"
         width="100%"
@@ -66,7 +67,7 @@ const PelayananLegal: React.FC = () => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        boxShadow="md"
+        // boxShadow="md"
       >
         <Heading
           mb={{ base: 6, md: 8, lg: 10 }} // Bottom margin for the heading
