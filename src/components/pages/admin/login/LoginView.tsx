@@ -23,6 +23,7 @@ const LoginView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(''); // Clear previous errors
     try {
       await login(username, password);
     } catch (err) {
@@ -44,8 +45,11 @@ const LoginView: React.FC = () => {
         borderRadius={8}
         boxShadow="lg"
         onSubmit={handleSubmit}
+        width={{ base: '90%', sm: '400px' }} // Responsive width
       >
-        <Heading mb={6}>Log In</Heading>
+        <Heading mb={6} textAlign="center">
+          Log In
+        </Heading>
 
         {error && (
           <Alert status="error" mb={4}>
@@ -58,7 +62,7 @@ const LoginView: React.FC = () => {
           <FormLabel htmlFor="username">Username</FormLabel>
           <Input
             id="username"
-            placeholder="admin"
+            placeholder="Enter your username"
             type="text"
             variant="filled"
             value={username}
@@ -70,7 +74,7 @@ const LoginView: React.FC = () => {
           <FormLabel htmlFor="password">Password</FormLabel>
           <Input
             id="password"
-            placeholder="********"
+            placeholder="Enter your password"
             type="password"
             variant="filled"
             value={password}
@@ -78,7 +82,7 @@ const LoginView: React.FC = () => {
           />
         </FormControl>
 
-        <Button colorScheme="teal" type="submit" mb={8}>
+        <Button colorScheme="teal" type="submit">
           Log In
         </Button>
       </Flex>

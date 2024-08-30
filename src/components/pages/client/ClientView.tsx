@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import NavbarMenus from './layout/navbar/NavbarMenus';
 import Layout from './layout/Layout';
 import HomePage from './render/Homepage';
+import AktaPerusahaan from './render/AktaPerusahaan';
 
 const ClientView: React.FC = () => {
   return (
@@ -18,7 +18,14 @@ const ClientView: React.FC = () => {
               </Layout>
             }
           />
-
+          <Route
+            path="/dokumen/akta"
+            element={
+              <Layout>
+                <AktaPerusahaan />
+              </Layout>
+            }
+          />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Box>

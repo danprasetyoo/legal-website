@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from 'react';
 import axios from 'axios';
 
 interface AuthContextType {
@@ -16,6 +22,13 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
   const login = async (username: string, password: string): Promise<void> => {
     try {
       const response = await axios.post('http://localhost:5000/admin/login', {
@@ -24,7 +37,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       });
 
       if (response.status === 200 && response.data.token) {
-        localStorage.setItem('authToken', response.data.token); // Store the token
+        localStorage.setItem('authToken', response.data.token);
         setIsAuthenticated(true);
       } else {
         throw new Error('Invalid username or password');
@@ -36,7 +49,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem('authToken'); // Clear token
+    localStorage.removeItem('authToken');
     setIsAuthenticated(false);
   };
 
