@@ -15,7 +15,7 @@ export const App: React.FC = () => {
         <AuthProvider>
           <Routes>
             {/* Client Routes */}
-            <Route path="/" element={<ClientView />} />
+            <Route path="/*" element={<ClientView />} />
 
             {/* Admin Routes */}
             <Route path="/login" element={<LoginPage />} />

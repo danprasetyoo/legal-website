@@ -228,7 +228,6 @@ const NavbarMenus: React.FC = () => {
           <Box position="relative">
             <ChakraLink
               as={Link}
-              to="#"
               onClick={toggleDokumen}
               sx={{
                 ...navbarStyles.link,

@@ -26,7 +26,7 @@ const AktaPerusahaan: React.FC = () => {
       gap={6}
     >
       <Link
-        href="https://docs.google.com/document/d/16Plfm33MVJAJ3mO5OHweD9Wnk3wqr8bZ/edit" // Ganti dengan URL untuk pilihan 1
+        href="https://docs.google.com/document/d/16Plfm33MVJAJ3mO5OHweD9Wnk3wqr8bZ/edit"
         isExternal
         _hover={{ transform: 'scale(1.05)', transition: 'transform 0.3s ease' }}
       >
@@ -56,7 +56,7 @@ const AktaPerusahaan: React.FC = () => {
         </Box>
       </Link>
       <Link
-        href="https://docs.google.com/document/d/16Plfm33MVJAJ3mO5OHweD9Wnk3wqr8bZ/edit" // Ganti dengan URL untuk pilihan 2
+        href="https://docs.google.com/document/d/16Plfm33MVJAJ3mO5OHweD9Wnk3wqr8bZ/edit"
         isExternal
         _hover={{ transform: 'scale(1.05)', transition: 'transform 0.3s ease' }}
       >

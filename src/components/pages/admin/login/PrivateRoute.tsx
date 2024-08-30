@@ -10,7 +10,6 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ element }) => {
   const { isAuthenticated } = useAuth();
   const location = useLocation();
 
-  // Jika pengguna tidak diautentikasi, alihkan ke halaman login
   if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} />;
   }

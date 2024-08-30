@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Container, useBreakpointValue } from '@chakra-ui/react';
-import Carousel from '../homepages/carousel/Carousel';
+// import Carousel from '../layout/carousel/Carousel';
 import PelayananLegal from '../homepages/PelayananLegal';
 import SeparatorPage from '../homepages/SeparatorPage';
 import CallAleaPage from '../homepages/CallAleaPage';
@@ -11,7 +11,7 @@ const HomePage: React.FC = () => {
 
   return (
     <Box bg="#FFFFFF">
-      <Carousel />
+      {/* <Carousel /> */}
       <Container
         maxW="container.xl"
         p={containerPadding}

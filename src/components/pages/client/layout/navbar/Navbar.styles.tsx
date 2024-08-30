@@ -67,8 +67,8 @@ export const navbarStyles = {
     },
   },
   dropdownIcon: {
-    ml: 2,
-    color: 'blue.700',
+    ml: 1,
+    color: 'blue.800',
     transition: 'transform 0.3s ease',
   },
   dropdownIconOpen: {
