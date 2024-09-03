@@ -60,9 +60,10 @@ export const navbarStyles = {
     display: 'block',
     padding: 3,
     borderRadius: 'md',
-    color: 'blue.700',
+    color: 'black', // Set dropdown item color to black
     _hover: {
-      bg: 'blue.50',
+      bg: 'blue.500', // Optional: Change background on hover
+      color: 'white', // Optional: Change text color on hover
       textDecoration: 'none',
     },
   },
