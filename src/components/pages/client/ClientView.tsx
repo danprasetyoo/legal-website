@@ -5,6 +5,9 @@ import Layout from './layout/Layout';
 import HomePage from './render/Homepage';
 import AktaPerusahaan from './render/AktaPerusahaan';
 import AssetPerusahaan from './render/AssetPerusahaan';
+import SopLegal from './render/SopLegal';
+import MateriLegal from './render/MateriLegal';
+import ProfilLegal from './render/ProfilLegal';
 
 const ClientView: React.FC = () => {
   return (
@@ -32,6 +35,30 @@ const ClientView: React.FC = () => {
             element={
               <Layout>
                 <AssetPerusahaan />
+              </Layout>
+            }
+          />
+          <Route
+            path="/dokumen/sk-sop-legal"
+            element={
+              <Layout>
+                <SopLegal />
+              </Layout>
+            }
+          />
+          <Route
+            path="/materi-legal"
+            element={
+              <Layout>
+                <MateriLegal />
+              </Layout>
+            }
+          />
+          <Route
+            path="/profil-legal"
+            element={
+              <Layout>
+                <ProfilLegal />
               </Layout>
             }
           />

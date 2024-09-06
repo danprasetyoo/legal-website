@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
   return (
     <Box
       bg={colors.background.light}
-      color={colors.text.black}
+      color={colors.text.light}
       py={8}
       px={{ base: 4, md: 8 }}
       borderTopWidth={5}

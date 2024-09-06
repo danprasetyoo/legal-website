@@ -11,7 +11,7 @@ export const navbarStyles = {
   link: {
     fontSize: 'md',
     fontWeight: 'bold',
-    color: 'gray.600',
+    color: '#9d9fa2',
     position: 'relative',
     display: 'inline-block',
     _before: {
@@ -21,19 +21,19 @@ export const navbarStyles = {
       bottom: -2,
       width: '0%',
       height: '3px',
-      bg: 'red.500',
+      bg: '#ee1431',
       transition: 'width 0.3s ease, left 0.3s ease',
     },
     _hover: {
       textDecoration: 'none',
-      color: 'red.500',
+      color: '#ee1431',
       _before: {
         width: '100%',
         left: 0,
       },
     },
     _activeLink: {
-      color: 'red.500',
+      color: '#ee1431',
       _before: {
         width: '100%',
         left: 0,
@@ -54,7 +54,7 @@ export const navbarStyles = {
     zIndex: 10,
     w: '240px',
     border: '1px solid',
-    borderColor: 'blue.300',
+    borderColor: '#124d83',
   },
   dropdownItem: {
     display: 'block',
@@ -62,14 +62,14 @@ export const navbarStyles = {
     borderRadius: 'md',
     color: 'black', // Set dropdown item color to black
     _hover: {
-      bg: 'blue.500', // Optional: Change background on hover
+      bg: '#124d83', // Optional: Change background on hover
       color: 'white', // Optional: Change text color on hover
       textDecoration: 'none',
     },
   },
   dropdownIcon: {
     ml: 1,
-    color: 'blue.800',
+    color: '#124d83',
     transition: 'transform 0.3s ease',
   },
   dropdownIconOpen: {
@@ -82,6 +82,6 @@ export const navbarStyles = {
     p: 5,
     px: 6,
     borderTopWidth: '1px',
-    borderTopColor: 'blue.300',
+    borderTopColor: '#124d83',
   },
 } as const;

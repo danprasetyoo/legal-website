@@ -1,7 +1,7 @@
 import { Text } from '@chakra-ui/react';
 
-const AssetPerusahaan: React.FC = () => {
+const MateriLegal: React.FC = () => {
   return <Text>No Content</Text>;
 };
 
-export default AssetPerusahaan;
+export default MateriLegal;

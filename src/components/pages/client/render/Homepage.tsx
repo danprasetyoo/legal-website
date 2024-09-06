@@ -15,7 +15,7 @@ const HomePage: React.FC = () => {
       <Container
         maxW="container.xl"
         p={containerPadding}
-        bg="#FFFFFF" // Background color set to white
+        bg="#FFFFFF"
         mt={8}
         mb={12}
       >

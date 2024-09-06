@@ -85,7 +85,7 @@ const NavbarMenus: React.FC = () => {
                 : {}),
             }}
           >
-            Home
+            Beranda
           </ChakraLink>
 
           <Box position="relative">
@@ -130,7 +130,7 @@ const NavbarMenus: React.FC = () => {
                 </ChakraLink>
                 <ChakraLink
                   as={Link}
-                  to="/dokumen/aset"
+                  to="/dokumen/asset"
                   sx={{
                     ...navbarStyles.link,
                     ...navbarStyles.dropdownItem,

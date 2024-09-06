@@ -81,10 +81,10 @@ const PelayananLegal: React.FC = () => {
             textAlign="center"
           >
             <Image
-              src={service.imageUrl} // Gunakan URL gambar dari data layanan
+              src={service.imageUrl}
               alt={service.title}
               borderRadius="md"
-              boxSize={{ base: '150px', md: '250px' }} // Sesuaikan ukuran gambar
+              boxSize={{ base: '150px', md: '250px' }}
               objectFit="cover"
               mb={4}
             />

@@ -28,7 +28,7 @@ const theme = extendTheme({
       dark: '#303030',
     },
     text: {
-      light: '#F0F0F0',
+      light: '#000000',
       dark: '#FFFFFF',
     },
   },
