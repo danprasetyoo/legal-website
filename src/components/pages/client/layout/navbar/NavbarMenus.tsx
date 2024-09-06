@@ -22,7 +22,7 @@ const NavbarMenus: React.FC = () => {
   const location = useLocation();
   const [isDokumenOpen, setIsDokumenOpen] = useState(false);
   const [bgColor, setBgColor] = useState('transparent');
-  const [linkColor, setLinkColor] = useState('white');
+  const [linkColor, setLinkColor] = useState('');
 
   const toggleDokumen = () => setIsDokumenOpen(!isDokumenOpen);
 
@@ -32,7 +32,7 @@ const NavbarMenus: React.FC = () => {
       setLinkColor('black');
     } else {
       setBgColor('transparent');
-      setLinkColor('white');
+      setLinkColor('black');
     }
   };
 
@@ -136,7 +136,7 @@ const NavbarMenus: React.FC = () => {
                     ...navbarStyles.dropdownItem,
                     color: linkColor,
                     fontWeight: 'bold',
-                    ...(location.pathname === '/dokumen/aset'
+                    ...(location.pathname === '/dokumen/asset'
                       ? navbarStyles.link._activeLink
                       : {}),
                   }}
@@ -266,18 +266,18 @@ const NavbarMenus: React.FC = () => {
                 </ChakraLink>
                 <ChakraLink
                   as={Link}
-                  to="/dokumen/aset"
+                  to="/dokumen/asset"
                   sx={{
                     ...navbarStyles.link,
                     ...navbarStyles.dropdownItem,
                     color: linkColor,
                     fontWeight: 'bold',
-                    ...(location.pathname === '/dokumen/aset'
+                    ...(location.pathname === '/dokumen/asset'
                       ? navbarStyles.link._activeLink
                       : {}),
                   }}
                 >
-                  Aset Perusahaan
+                  Asset Perusahaan
                 </ChakraLink>
                 <ChakraLink
                   as={Link}

@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './layout/Layout';
 import HomePage from './render/Homepage';
 import AktaPerusahaan from './render/AktaPerusahaan';
+import AssetPerusahaan from './render/AssetPerusahaan';
 
 const ClientView: React.FC = () => {
   return (
@@ -23,6 +24,14 @@ const ClientView: React.FC = () => {
             element={
               <Layout>
                 <AktaPerusahaan />
+              </Layout>
+            }
+          />
+          <Route
+            path="/dokumen/asset"
+            element={
+              <Layout>
+                <AssetPerusahaan />
               </Layout>
             }
           />

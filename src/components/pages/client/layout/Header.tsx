@@ -12,6 +12,10 @@ interface PageCaptions {
 const pages: PageCaptions = {
   '/': { caption: 'Welcome Legal riu' },
   '/dokumen/akta': { caption: 'Akta Perusahaan Details' },
+  '/dokumen/asset': { caption: 'Asset Perusahaan' },
+  '/dokumen/sk-sop-legal': { caption: 'SK SOP Legal' },
+  '/materi-legal': { caption: 'Materi Legal' },
+  '/profil-legal': { caption: 'Profil Legal' },
 };
 
 // Define the type for the component props
