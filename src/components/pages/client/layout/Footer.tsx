@@ -1,3 +1,4 @@
+// Footer.tsx
 import React from 'react';
 import {
   Box,
@@ -16,6 +17,10 @@ import {
   FaInstagram,
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { navigationItems, NavItemOrGroup, NavGroup } from './NavigationItems';
+
+// Type guard to check if item is NavGroup
+const isNavGroup = (item: NavItemOrGroup): item is NavGroup => 'items' in item;
 
 const Footer: React.FC = () => {
   const { colors } = useTheme();
@@ -41,34 +46,21 @@ const Footer: React.FC = () => {
             Navigation
           </Text>
           <Stack spacing={2}>
-            <ChakraLink
-              as={Link}
-              to="/"
-              _hover={{ textDecoration: 'underline' }}
-            >
-              Home
-            </ChakraLink>
-            <ChakraLink
-              as={Link}
-              to="/about"
-              _hover={{ textDecoration: 'underline' }}
-            >
-              About Us
-            </ChakraLink>
-            <ChakraLink
-              as={Link}
-              to="/services"
-              _hover={{ textDecoration: 'underline' }}
-            >
-              Services
-            </ChakraLink>
-            <ChakraLink
-              as={Link}
-              to="/contact"
-              _hover={{ textDecoration: 'underline' }}
-            >
-              Contact
-            </ChakraLink>
+            {navigationItems.map((item, index) => {
+              if (!isNavGroup(item)) {
+                return (
+                  <ChakraLink
+                    key={index}
+                    as={Link}
+                    to={item.path}
+                    _hover={{ textDecoration: 'underline' }}
+                  >
+                    {item.label}
+                  </ChakraLink>
+                );
+              }
+              return null;
+            })}
           </Stack>
         </Stack>
 

@@ -5,13 +5,13 @@ export const navbarStyles = {
   },
   logo: {
     width: '80px',
-    height: '90px',
+    height: '50px',
     maxWidth: '100%',
   },
   link: {
     fontSize: 'md',
     fontWeight: 'bold',
-    color: '#9d9fa2',
+    color: '#000000',
     position: 'relative',
     display: 'inline-block',
     _before: {

@@ -1,28 +1,44 @@
+// src/components/HeaderImage.tsx
+
 import React from 'react';
 import { Box, Text, useBreakpointValue } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
+import {
+  navigationItems,
+  NavItemOrGroup,
+  NavGroup,
+  NavItem,
+} from './NavigationItems';
 
-interface PageCaptions {
-  [key: string]: { caption: string };
-}
-
-// Define the captions for different routes
-const pages: PageCaptions = {
-  '/': { caption: 'Beranda' },
-  '/dokumen/akta': { caption: 'Akta Perusahaan Details' },
-  '/dokumen/asset': { caption: 'Asset Perusahaan' },
-  '/dokumen/sk-sop-legal': { caption: 'SK SOP Legal' },
-  '/materi-legal': { caption: 'Materi Legal' },
-  '/profil-legal': { caption: 'Profil Legal' },
+// Helper function to find a NavItem by path
+const findNavItem = (
+  items: NavItemOrGroup[],
+  path: string
+): NavItem | undefined => {
+  for (const item of items) {
+    if (!('items' in item)) {
+      // If it's a NavItem
+      if (item.path === path) {
+        return item;
+      }
+    } else {
+      // If it's a NavGroup, check its items
+      const foundItem = findNavItem(item.items, path);
+      if (foundItem) {
+        return foundItem;
+      }
+    }
+  }
+  return undefined;
 };
 
-// Define the type for the component props
 const HeaderImage: React.FC = () => {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  // Get caption based on the current path
-  const { caption } = pages[currentPath] || { caption: 'Default Caption' };
+  // Find the NavItem based on the current path
+  const currentItem = findNavItem(navigationItems, currentPath);
+  const caption = currentItem ? currentItem.label : 'Default Caption';
 
   // Responsive font size
   const fontSize = useBreakpointValue({
