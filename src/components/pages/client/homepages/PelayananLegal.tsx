@@ -58,7 +58,8 @@ const PelayananLegal: React.FC = () => {
       <Heading
         mb={{ base: 6, md: 8, lg: 10 }}
         textAlign="center"
-        color={colors.primary.main}
+        color={colors.primary.dark}
+        fontSize="5xl"
       >
         Pelayanan Legal RIU
       </Heading>
@@ -72,7 +73,7 @@ const PelayananLegal: React.FC = () => {
             boxShadow="md"
             transition="all 0.3s"
             _hover={{ boxShadow: 'lg', transform: 'scale(1.05)' }}
-            bg={colors.primary.main}
+            bg={colors.secondary.main}
             borderColor={colors.primary.dark}
             p={{ base: 6, md: 8 }}
             display="flex"

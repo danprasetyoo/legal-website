@@ -4,14 +4,18 @@ export const navbarStyles = {
     py: 3,
   },
   logo: {
-    width: '80px',
+    width: '90px',
     height: '50px',
     maxWidth: '100%',
+    '@media (max-width: 48em)': {
+      width: '70px',
+      height: '40px',
+    },
   },
   link: {
     fontSize: 'md',
     fontWeight: 'bold',
-    color: '#000000',
+    color: 'black',
     position: 'relative',
     display: 'inline-block',
     _before: {
@@ -41,7 +45,7 @@ export const navbarStyles = {
     },
   },
   navLinkContainer: {
-    spacing: 6,
+    gap: 6,
     pr: 6,
   },
   dropdown: {
@@ -55,16 +59,31 @@ export const navbarStyles = {
     w: '240px',
     border: '1px solid',
     borderColor: '#124d83',
+    display: 'none',
+    top: '100%',
+    left: 0,
+    maxH: '400px',
+    overflowY: 'auto',
+    '@media (max-width: 48em)': {
+      w: '100%',
+      maxW: '300px',
+    },
+  },
+  dropdownVisible: {
+    display: 'block',
   },
   dropdownItem: {
     display: 'block',
     padding: 3,
     borderRadius: 'md',
-    color: 'black', // Set dropdown item color to black
+    color: 'black',
     _hover: {
-      bg: '#124d83', // Optional: Change background on hover
-      color: 'white', // Optional: Change text color on hover
+      bg: '#124d83',
+      color: 'white',
       textDecoration: 'none',
+    },
+    '@media (max-width: 48em)': {
+      fontSize: 'sm',
     },
   },
   dropdownIcon: {
@@ -81,7 +100,7 @@ export const navbarStyles = {
     bg: 'white',
     p: 5,
     px: 6,
-    borderTopWidth: '1px',
+    borderTopWidth: '2px',
     borderTopColor: '#124d83',
   },
 } as const;

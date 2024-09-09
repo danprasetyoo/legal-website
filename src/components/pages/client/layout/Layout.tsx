@@ -9,7 +9,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     <Flex direction="column" minHeight="100vh">
       <NavbarMenus />
       <Header />
-      <Box as="main" flex="1" bg="#FFFFFF">
+      <Box as="main" flex="1" bg="#F5F5F5">
         {children}
       </Box>
       <Footer />

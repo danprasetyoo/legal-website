@@ -3,26 +3,18 @@
 import React from 'react';
 import { Box, Text, useBreakpointValue } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
-import {
-  navigationItems,
-  NavItemOrGroup,
-  NavGroup,
-  NavItem,
-} from './NavigationItems';
+import { navigationItems, NavItemOrGroup, NavItem } from './NavigationItems';
 
-// Helper function to find a NavItem by path
 const findNavItem = (
   items: NavItemOrGroup[],
   path: string
 ): NavItem | undefined => {
   for (const item of items) {
     if (!('items' in item)) {
-      // If it's a NavItem
       if (item.path === path) {
         return item;
       }
     } else {
-      // If it's a NavGroup, check its items
       const foundItem = findNavItem(item.items, path);
       if (foundItem) {
         return foundItem;
@@ -65,7 +57,7 @@ const HeaderImage: React.FC = () => {
         top="50%"
         left="50%"
         transform="translate(-50%, -50%)"
-        bg="rgba(0, 0, 0, 0)"
+        bg="rgba(0, 0, 0, 0.1)"
         color="white"
         p={4}
         borderRadius="md"
@@ -86,7 +78,7 @@ const HeaderImage: React.FC = () => {
             bottom="-2px"
             left="0"
             width="100%"
-            height="5px"
+            height="10px"
             bg="red.500"
           />
         </Text>

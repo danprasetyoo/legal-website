@@ -7,13 +7,13 @@ import {
   Collapse,
   Image,
   VStack,
-  useDisclosure,
   Link as ChakraLink,
+  useDisclosure,
   Stack,
   Icon,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, ChevronRightIcon } from '@chakra-ui/icons';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { navigationItems, NavItemOrGroup, NavGroup } from '../NavigationItems';
 import { navbarStyles } from './Navbar.styles';
 import IndonesiaRe from '../../../../assets/client/IndonesiaRe.png';
@@ -23,14 +23,19 @@ const isNavGroup = (item: NavItemOrGroup): item is NavGroup => 'items' in item;
 
 const NavbarMenus: React.FC = () => {
   const { isOpen, onToggle } = useDisclosure();
-  const [isDokumenOpen, setIsDokumenOpen] = useState(false);
+  const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(
+    null
+  );
   const [bgColor, setBgColor] = useState('transparent');
-  const [linkColor, setLinkColor] = useState(''); // Set link color to #9d9fa2
-
-  const toggleDokumen = () => setIsDokumenOpen(!isDokumenOpen);
+  const [linkColor, setLinkColor] = useState('black');
+  const [isDokumenOpen, setIsDokumenOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+    window.matchMedia('(max-width: 48em)').matches
+  ); // Check if the screen is mobile
+  const location = useLocation();
 
   const handleScroll = () => {
-    if (window.scrollY > 200) {
+    if (window.scrollY > 100) {
       setBgColor('white');
       setLinkColor('black');
     } else {
@@ -40,9 +45,32 @@ const NavbarMenus: React.FC = () => {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    const handleResize = () => {
+      setIsMobile(window.matchMedia('(max-width: 48em)').matches); // Update isMobile based on screen width
+    };
+
+    if (!isMobile) {
+      window.addEventListener('scroll', handleScroll);
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup listeners on component unmount
+    return () => {
+      if (!isMobile) {
+        window.removeEventListener('scroll', handleScroll);
+      }
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isMobile]);
+
+  const toggleDropdown = (index: number) => {
+    setOpenDropdownIndex(openDropdownIndex === index ? null : index);
+  };
+
+  const toggleDokumen = () => {
+    setIsDokumenOpen(!isDokumenOpen);
+  };
 
   const renderNavItems = (items: NavItemOrGroup[], isMobile: boolean) => {
     return items.map((item, index) => {
@@ -53,14 +81,23 @@ const NavbarMenus: React.FC = () => {
             <ChakraLink
               as={Link}
               to="#"
-              onClick={isMobile ? toggleDokumen : undefined}
+              onClick={(e) => {
+                e.preventDefault();
+                if (isMobile) {
+                  toggleDropdown(index);
+                } else {
+                  setOpenDropdownIndex(
+                    openDropdownIndex === index ? null : index
+                  );
+                }
+              }}
               sx={{
                 ...navbarStyles.link,
                 color: linkColor,
                 fontWeight: 'bold',
                 _before: {
                   ...navbarStyles.link._before,
-                  width: isDokumenOpen && isMobile ? '100%' : '0%',
+                  width: openDropdownIndex === index ? '100%' : '0%',
                 },
                 _hover: navbarStyles.link._hover,
                 _activeLink: navbarStyles.link._activeLink,
@@ -71,14 +108,19 @@ const NavbarMenus: React.FC = () => {
                 as={ChevronRightIcon}
                 sx={{
                   ...navbarStyles.dropdownIcon,
-                  ...(isDokumenOpen &&
-                    isMobile &&
+                  ...(openDropdownIndex === index &&
                     navbarStyles.dropdownIconOpen),
                 }}
               />
             </ChakraLink>
-            <Collapse in={isDokumenOpen && isMobile}>
-              <Stack spacing={2} mt={2} sx={navbarStyles.dropdown}>
+            <Box
+              sx={{
+                ...navbarStyles.dropdown,
+                ...(openDropdownIndex === index &&
+                  navbarStyles.dropdownVisible),
+              }}
+            >
+              <Stack spacing={3} mt={2}>
                 {item.items.map((subItem) => (
                   <ChakraLink
                     key={subItem.path}
@@ -90,7 +132,7 @@ const NavbarMenus: React.FC = () => {
                   </ChakraLink>
                 ))}
               </Stack>
-            </Collapse>
+            </Box>
           </Box>
         );
       } else {
@@ -119,7 +161,7 @@ const NavbarMenus: React.FC = () => {
       top={0}
       width="full"
       zIndex={1000}
-      backdropFilter="blur(0px)"
+      backdropFilter="blur(1px)"
       transition="background-color 0.3s ease, box-shadow 0.3s ease"
     >
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'} p={4}>
@@ -158,11 +200,129 @@ const NavbarMenus: React.FC = () => {
         <VStack
           as={'nav'}
           display={{ base: 'flex', md: 'none' }}
-          spacing={5}
-          alignItems={'center'}
+          spacing={4}
+          alignItems={'flex-start'}
           sx={navbarStyles.mobileMenu}
         >
-          {renderNavItems(navigationItems, true)}
+          <ChakraLink
+            as={Link}
+            to="/"
+            sx={{
+              ...navbarStyles.link,
+              color: linkColor,
+              fontWeight: 'bold',
+              ...(location.pathname === '/'
+                ? navbarStyles.link._activeLink
+                : {}),
+            }}
+          >
+            Home
+          </ChakraLink>
+          <Box position="relative">
+            <ChakraLink
+              as={Link}
+              to="#"
+              onClick={toggleDokumen}
+              sx={{
+                ...navbarStyles.link,
+                color: linkColor,
+                fontWeight: 'bold',
+                ...(location.pathname.startsWith('/dokumen')
+                  ? navbarStyles.link._activeLink
+                  : {}),
+              }}
+            >
+              Dokumen Perusahaan
+              <Icon
+                as={ChevronRightIcon}
+                sx={{
+                  ...navbarStyles.dropdownIcon,
+                  ...(isDokumenOpen ? navbarStyles.dropdownIconOpen : {}),
+                }}
+              />
+            </ChakraLink>
+            <Collapse in={isDokumenOpen}>
+              <VStack
+                spacing={3}
+                alignItems={'flex-start'}
+                sx={navbarStyles.mobileMenu}
+              >
+                <ChakraLink
+                  as={Link}
+                  to="/dokumen/akta"
+                  sx={{
+                    ...navbarStyles.link,
+                    ...navbarStyles.dropdownItem,
+                    color: linkColor,
+                    fontWeight: 'bold',
+                    ...(location.pathname === '/dokumen/akta'
+                      ? navbarStyles.link._activeLink
+                      : {}),
+                  }}
+                >
+                  Akta Perusahaan
+                </ChakraLink>
+                <ChakraLink
+                  as={Link}
+                  to="/dokumen/asset"
+                  sx={{
+                    ...navbarStyles.link,
+                    ...navbarStyles.dropdownItem,
+                    color: linkColor,
+                    fontWeight: 'bold',
+                    ...(location.pathname === '/dokumen/aset'
+                      ? navbarStyles.link._activeLink
+                      : {}),
+                  }}
+                >
+                  Aset Perusahaan
+                </ChakraLink>
+                <ChakraLink
+                  as={Link}
+                  to="/dokumen/sk-sop-legal"
+                  sx={{
+                    ...navbarStyles.link,
+                    ...navbarStyles.dropdownItem,
+                    color: linkColor,
+                    fontWeight: 'bold',
+                    ...(location.pathname === '/dokumen/sk-sop-legal'
+                      ? navbarStyles.link._activeLink
+                      : {}),
+                  }}
+                >
+                  SK SOP Legal
+                </ChakraLink>
+              </VStack>
+            </Collapse>
+          </Box>
+          <ChakraLink
+            as={Link}
+            to="/materi-legal"
+            sx={{
+              ...navbarStyles.link,
+              color: linkColor,
+              fontWeight: 'bold',
+              ...(location.pathname === '/materi-legal'
+                ? navbarStyles.link._activeLink
+                : {}),
+            }}
+          >
+            Materi Legal
+          </ChakraLink>
+          <ChakraLink
+            as={Link}
+            to="/profil-legal"
+            sx={{
+              ...navbarStyles.link,
+              color: linkColor,
+              fontWeight: 'bold',
+              ...(location.pathname === '/profil-legal'
+                ? navbarStyles.link._activeLink
+                : {}),
+            }}
+          >
+            Profil Legal
+          </ChakraLink>
         </VStack>
       </Collapse>
     </Box>
