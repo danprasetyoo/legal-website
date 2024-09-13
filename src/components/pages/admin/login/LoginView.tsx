@@ -23,7 +23,7 @@ const LoginView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(''); // Clear previous errors
+    setError('');
     try {
       await login(username, password);
     } catch (err) {
@@ -45,7 +45,7 @@ const LoginView: React.FC = () => {
         borderRadius={8}
         boxShadow="lg"
         onSubmit={handleSubmit}
-        width={{ base: '90%', sm: '400px' }} // Responsive width
+        width={{ base: '90%', sm: '400px' }}
       >
         <Heading mb={6} textAlign="center">
           Log In

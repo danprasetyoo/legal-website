@@ -27,10 +27,10 @@ const HomePage: React.FC = () => {
       <Box bg="#F5F5F5" py={15}>
         <SeparatorPage />
       </Box>
-      <Box bg="#ee1431">
+      <Box bg="#F5F5F5">
         <Container
           maxW="container.xl"
-          bg="#ee1431"
+          bg="#F5F5F5"
           p={containerPadding}
           mt={12}
         >

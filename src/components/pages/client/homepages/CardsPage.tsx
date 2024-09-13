@@ -53,14 +53,14 @@ const CardsPage: React.FC = () => {
   const colors = colorTheme[colorMode];
 
   return (
-    <Box
-      p={6}
-      bgImage="url('https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_160x56dp.png')" // Replace with your desired background image URL
-      bgSize="cover"
-      bgPosition="center"
-      bgRepeat="no-repeat"
-    >
-      <Heading as="h1" size="2xl" mb={8} textAlign="center" color={colors.text}>
+    <Box p={6} bgSize="cover" bgPosition="center" bgRepeat="no-repeat">
+      <Heading
+        as="h1"
+        size="2xl"
+        mb={10}
+        textAlign="center"
+        color="primary.light"
+      >
         Informasi Utama
       </Heading>
       <SimpleGrid columns={columns} spacing={8}>
@@ -95,14 +95,11 @@ const CardsPage: React.FC = () => {
                 size="lg"
                 mb={4}
                 fontWeight="bold"
-                color={colors.text}
+                color="primary.light"
               >
                 {card.title}
               </Heading>
-              <Text
-                fontSize="md"
-                color={useColorModeValue('gray.600', 'gray.400')}
-              >
+              <Text fontSize="md" color="primary.light">
                 {card.description}
               </Text>
             </Box>

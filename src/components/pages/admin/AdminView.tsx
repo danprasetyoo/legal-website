@@ -11,10 +11,8 @@ const AdminView: React.FC = () => {
   const location = useLocation();
   const { isAuthenticated } = useAuth();
 
-  // Determine if the current path is the login route
   const isLoginPage = location.pathname === '/admin/login';
 
-  // Render different layouts based on authentication status
   return (
     <AuthProvider>
       <Flex direction={{ base: 'column', md: 'row' }} minHeight="100vh">

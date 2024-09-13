@@ -10,17 +10,16 @@ import {
 import AleaIcon from '../../../assets/client/pngwing.com (3).png';
 
 const CallAleaPage: React.FC = () => {
-  // Perbesar ukuran gambar
   const imageSize = useBreakpointValue({ base: '200px', md: '500px' });
 
   return (
     <Flex
       direction={{ base: 'column', md: 'row' }}
-      align="center" // Center items horizontally
-      justify="center" // Center items vertically
+      align="center"
+      justify="center"
       height="60vh"
       p={4}
-      bg="#ee1431"
+      bg="#F5F5F5"
       gap={6}
     >
       <Box
@@ -60,22 +59,16 @@ const CallAleaPage: React.FC = () => {
         <Text
           fontSize={{ base: 'lg', md: '6xl' }}
           fontWeight="bold"
-          color="primary.dark"
+          color="primary.light"
         >
           Call Alea
         </Text>
-        <Text fontSize={{ base: 'md', md: 'lg' }} color="primary.dark" p={2}>
+        <Text fontSize={{ base: 'md', md: 'lg' }} color="primary.light" p={2}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quisquam
           voluptate error exercitationem obcaecati inventore voluptatum id eius
           eligendi magnam enim assumenda eveniet corrupti fuga pariatur eum,
           nisi iusto. Delectus.
         </Text>
-        {/* <Image
-          src={Arrow}
-          alt="Arrow"
-          boxSize={arrowSize}
-          transform="rotate(180deg)"
-        /> */}
       </Flex>
     </Flex>
   );

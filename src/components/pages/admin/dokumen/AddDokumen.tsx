@@ -68,10 +68,9 @@ const AddDokumenDireksi = ({ onSuccess }: AddProps) => {
       });
       onClose();
       if (onSuccess) {
-        onSuccess(); // Trigger the onSuccess callback to refresh data or perform other actions
+        onSuccess();
       }
     } catch (error) {
-      // Type guard to check if error is an instance of Error
       if (axios.isAxiosError(error)) {
         toast({
           title: 'Failed to create Akta',
@@ -81,7 +80,6 @@ const AddDokumenDireksi = ({ onSuccess }: AddProps) => {
           isClosable: true,
         });
       } else {
-        // Handle unexpected errors
         toast({
           title: 'An unexpected error occurred',
           description: (error as Error).message || 'Unknown error',
