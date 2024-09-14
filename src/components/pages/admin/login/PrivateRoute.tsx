@@ -10,6 +10,10 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ element }) => {
   const { isAuthenticated } = useAuth();
   const location = useLocation();
 
+  if (isAuthenticated === undefined) {
+    return <div>Loading...</div>;
+  }
+
   if (!isAuthenticated) {
     return <Navigate to="/admin/login" state={{ from: location }} />;
   }

@@ -32,26 +32,28 @@ const fetcher = async (url: string, token: string) => {
     return response.data;
   } catch (error) {
     console.error('Error fetching authentication status:', error);
-    return null;
+    throw new Error('Failed to fetch authentication status');
   }
 };
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const apiUrl = 'http://localhost:5000/admin/login';
+  const apiUrl = 'http://localhost:5000/admin/status';
 
   const token = localStorage.getItem('authToken');
-  const { data, mutate } = useSWR<AuthResponseData>(
+  const { data, error, mutate } = useSWR<AuthResponseData>(
     token ? [apiUrl, token] : null,
     fetcher,
     { revalidateOnFocus: false }
   );
 
   useEffect(() => {
-    if (data !== undefined) {
+    if (data) {
       setIsAuthenticated(data.isAuthenticated);
+    } else if (error) {
+      setIsAuthenticated(false);
     }
-  }, [data]);
+  }, [data, error]);
 
   const login = async (username: string, password: string): Promise<void> => {
     try {
@@ -62,8 +64,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       if (response.status === 200 && response.data.token) {
         localStorage.setItem('authToken', response.data.token);
+        // Trigger revalidation and update state
         mutate();
-        setIsAuthenticated(true);
       } else {
         throw new Error('Invalid username or password');
       }
@@ -76,7 +78,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const logout = () => {
     localStorage.removeItem('authToken');
     mutate();
-    setIsAuthenticated(false);
   };
 
   return (

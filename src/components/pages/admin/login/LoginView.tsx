@@ -16,7 +16,6 @@ import { Navigate } from 'react-router-dom';
 const LoginView: React.FC = () => {
   const formBackground = useColorModeValue('gray.100', 'gray.700');
   const { login, isAuthenticated } = useAuth();
-
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -26,13 +25,14 @@ const LoginView: React.FC = () => {
     setError('');
     try {
       await login(username, password);
+      window.location.href = '/admin/akta';
     } catch (err) {
       setError('Invalid username or password');
     }
   };
 
   if (isAuthenticated) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/admin/akta" />;
   }
 
   return (
@@ -50,14 +50,12 @@ const LoginView: React.FC = () => {
         <Heading mb={6} textAlign="center">
           Log In
         </Heading>
-
         {error && (
           <Alert status="error" mb={4}>
             <AlertIcon />
             {error}
           </Alert>
         )}
-
         <FormControl mb={3}>
           <FormLabel htmlFor="username">Username</FormLabel>
           <Input
@@ -69,7 +67,6 @@ const LoginView: React.FC = () => {
             onChange={(e) => setUsername(e.target.value)}
           />
         </FormControl>
-
         <FormControl mb={6}>
           <FormLabel htmlFor="password">Password</FormLabel>
           <Input
@@ -81,7 +78,6 @@ const LoginView: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </FormControl>
-
         <Button colorScheme="teal" type="submit">
           Log In
         </Button>

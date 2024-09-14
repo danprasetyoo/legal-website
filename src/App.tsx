@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './components/pages/admin/login/AuthContext';
 import AdminView from './components/pages/admin/AdminView';
 import ClientView from './components/pages/client/ClientView';
-import LoginPage from './components/pages/admin/login/LoginView'; // Halaman login admin
+import LoginPage from './components/pages/admin/login/LoginView';
 import PrivateRoute from './components/pages/admin/login/PrivateRoute';
 import theme from './theme';
 
