@@ -11,11 +11,12 @@ import {
 import NavItem from './SidebarItems';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../login/AuthContext';
+
 const SidebarContent: React.FC = (props) => {
   const { logout } = useAuth();
 
   const handleLogout = () => {
-    logout(); // Correctly call logout without arguments
+    logout();
   };
 
   return (

@@ -6,6 +6,11 @@ import React, {
   useEffect,
 } from 'react';
 import axios from 'axios';
+import useSWR from 'swr';
+
+interface AuthResponseData {
+  isAuthenticated: boolean;
+}
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -19,15 +24,34 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
+const fetcher = async (url: string, token: string) => {
+  try {
+    const response = await axios.get(url, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching authentication status:', error);
+    return null;
+  }
+};
+
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const apiUrl = 'http://localhost:5000/admin/login';
+
+  const token = localStorage.getItem('authToken');
+  const { data, mutate } = useSWR<AuthResponseData>(
+    token ? [apiUrl, token] : null,
+    fetcher,
+    { revalidateOnFocus: false }
+  );
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      setIsAuthenticated(true);
+    if (data !== undefined) {
+      setIsAuthenticated(data.isAuthenticated);
     }
-  }, []);
+  }, [data]);
 
   const login = async (username: string, password: string): Promise<void> => {
     try {
@@ -38,6 +62,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       if (response.status === 200 && response.data.token) {
         localStorage.setItem('authToken', response.data.token);
+        mutate();
         setIsAuthenticated(true);
       } else {
         throw new Error('Invalid username or password');
@@ -50,6 +75,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem('authToken');
+    mutate();
     setIsAuthenticated(false);
   };
 

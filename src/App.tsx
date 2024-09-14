@@ -18,7 +18,7 @@ export const App: React.FC = () => {
             <Route path="/*" element={<ClientView />} />
 
             {/* Admin Routes */}
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/admin/login" element={<LoginPage />} />
             <Route
               path="/admin/*"
               element={<PrivateRoute element={<AdminView />} />}
