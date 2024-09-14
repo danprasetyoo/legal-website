@@ -61,7 +61,7 @@ const SidebarContent: React.FC = (props) => {
         aria-label="Main Navigation"
         my="4"
       >
-        <Link to="/dashboard">
+        <Link to="/admin/dashboard">
           <NavItem icon={MdHome}>Dashboard</NavItem>
         </Link>
         <Link to="/admin/akta">

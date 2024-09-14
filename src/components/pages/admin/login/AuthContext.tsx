@@ -25,6 +25,9 @@ interface AuthProviderProps {
 }
 
 const fetcher = async (url: string, token: string) => {
+  console.log('Fetching URL:', url);
+  console.log('Token:', token);
+
   try {
     const response = await axios.get(url, {
       headers: { Authorization: `Bearer ${token}` },
@@ -38,11 +41,12 @@ const fetcher = async (url: string, token: string) => {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const apiUrl = 'http://localhost:5000/admin/status';
 
+  const apiUrl = 'http://localhost:5000/admin/status';
   const token = localStorage.getItem('authToken');
+
   const { data, error, mutate } = useSWR<AuthResponseData>(
-    token ? [apiUrl, token] : null,
+    token ? [apiUrl, token] : null, // Pass URL and token as an array
     fetcher,
     { revalidateOnFocus: false }
   );
@@ -64,7 +68,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       if (response.status === 200 && response.data.token) {
         localStorage.setItem('authToken', response.data.token);
-        // Trigger revalidation and update state
         mutate();
       } else {
         throw new Error('Invalid username or password');
@@ -78,6 +81,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const logout = () => {
     localStorage.removeItem('authToken');
     mutate();
+    setIsAuthenticated(false);
   };
 
   return (
