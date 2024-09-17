@@ -24,14 +24,17 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-const fetcher = async (url: string, token: string) => {
+const fetcher = async (url: string) => {
   console.log('Fetching URL:', url);
-  console.log('Token:', token);
 
   try {
     const response = await axios.get(url, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${localStorage.getItem('authToken')}`,
+      },
     });
+    console.log('Response:', response);
     return response.data;
   } catch (error) {
     console.error('Error fetching authentication status:', error);
@@ -41,20 +44,22 @@ const fetcher = async (url: string, token: string) => {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-
   const apiUrl = 'http://localhost:5000/admin/status';
-  const token = localStorage.getItem('authToken');
+  const token = localStorage.getItem('authToken') || '';
+  console.log('Token in AuthProvider:', token);
 
   const { data, error, mutate } = useSWR<AuthResponseData>(
-    token ? [apiUrl, token] : null, // Pass URL and token as an array
+    token ? [apiUrl, token] : null,
     fetcher,
     { revalidateOnFocus: false }
   );
 
   useEffect(() => {
     if (data) {
+      console.log('Data:', data);
       setIsAuthenticated(data.isAuthenticated);
     } else if (error) {
+      console.error('Error:', error);
       setIsAuthenticated(false);
     }
   }, [data, error]);
@@ -66,9 +71,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         password,
       });
 
+      console.log('Login Response:', response);
+
       if (response.status === 200 && response.data.token) {
         localStorage.setItem('authToken', response.data.token);
-        mutate();
+        mutate(); // Refresh authentication status
       } else {
         throw new Error('Invalid username or password');
       }
@@ -80,7 +87,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem('authToken');
-    mutate();
+    mutate(); // Refresh authentication status
     setIsAuthenticated(false);
   };
 

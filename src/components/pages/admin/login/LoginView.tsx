@@ -31,9 +31,8 @@ const LoginView: React.FC = () => {
     }
   };
 
-  // Redirect to /admin/akta if authenticated
   if (isAuthenticated) {
-    return <Navigate to="/admin/akta" />;
+    return <Navigate to="/materi-lega" />;
   }
 
   return (

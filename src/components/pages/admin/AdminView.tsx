@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './login/AuthContext';
@@ -11,38 +11,42 @@ const AdminView: React.FC = () => {
   const location = useLocation();
   const { isAuthenticated } = useAuth();
 
+  useEffect(() => {
+    console.log('Authenticated:', isAuthenticated);
+  }, [isAuthenticated]);
+
   const isLoginPage = location.pathname === '/admin/login';
 
   return (
-    <AuthProvider>
-      <Flex direction={{ base: 'column', md: 'row' }} minHeight="100vh">
-        {/* Conditionally render the sidebar */}
-        {isAuthenticated && !isLoginPage && (
-          <Box
-            as="aside"
-            w={{ base: 'full', md: '250px' }}
-            display={{ base: 'none', md: 'block' }}
-            bg="white"
-            p={4}
-            position="relative"
-          >
-            <SidebarContent />
-          </Box>
-        )}
-
-        <Box as="main" flex="1" p={4}>
-          <Routes>
-            <Route path="/admin/login" element={<LoginView />} />
-            <Route
-              path="/admin/akta"
-              element={<PrivateRoute element={<ListDokumenDireksi />} />}
-            />
-            {/* Add other protected routes here */}
-            <Route path="/admin/*" element={<Navigate to="/admin/login" />} />
-          </Routes>
+    // <AuthProvider>
+    <Flex direction={{ base: 'column', md: 'row' }} minHeight="100vh">
+      {/* Conditionally render the sidebar */}
+      {isAuthenticated && !isLoginPage && (
+        <Box
+          as="aside"
+          w={{ base: 'full', md: '250px' }}
+          display={{ base: 'none', md: 'block' }}
+          bg="white"
+          p={4}
+          position="relative"
+        >
+          <SidebarContent />
         </Box>
-      </Flex>
-    </AuthProvider>
+      )}
+
+      <Box as="main" flex="1" p={4}>
+        <Routes>
+          <Route path="/admin/login" element={<LoginView />} />
+          <Route
+            path="/admin/akta"
+            element={<PrivateRoute element={<ListDokumenDireksi />} />}
+          />
+          {/* Add other protected routes here */}
+          <Route path="/admin/*" element={<Navigate to="/admin/login" />} />
+        </Routes>
+      </Box>
+    </Flex>
+    // </AuthProvider>
   );
 };
 
