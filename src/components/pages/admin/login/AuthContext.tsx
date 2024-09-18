@@ -31,7 +31,7 @@ const fetcher = async (url: string) => {
     const response = await axios.get(url, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `${localStorage.getItem('authToken')}`,
+        Authorization: `Bearer ${localStorage.getItem('authToken')}`,
       },
     });
     console.log('Response:', response);
