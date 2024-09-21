@@ -25,8 +25,6 @@ interface AuthProviderProps {
 }
 
 const fetcher = async (url: string) => {
-  console.log('Fetching URL:', url);
-
   try {
     const response = await axios.get(url, {
       headers: {
@@ -34,7 +32,7 @@ const fetcher = async (url: string) => {
         Authorization: `Bearer ${localStorage.getItem('authToken')}`,
       },
     });
-    console.log('Response:', response);
+    // console.log('Response:', response);
     return response.data;
   } catch (error) {
     console.error('Error fetching authentication status:', error);
@@ -49,9 +47,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   console.log('Token in AuthProvider:', token);
 
   const { data, error, mutate } = useSWR<AuthResponseData>(
-    token ? [apiUrl, token] : null,
+    token ? apiUrl : null,
     fetcher,
-    { revalidateOnFocus: false }
+    {
+      revalidateOnFocus: false,
+    }
   );
 
   useEffect(() => {

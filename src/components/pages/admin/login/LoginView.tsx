@@ -32,7 +32,7 @@ const LoginView: React.FC = () => {
   };
 
   if (isAuthenticated) {
-    return <Navigate to="/materi-lega" />;
+    return <Navigate to="/admin/dashboard" />;
   }
 
   return (
